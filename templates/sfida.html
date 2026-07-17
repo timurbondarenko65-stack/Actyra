@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Sfida la rete — Actyra{% endblock %}
+{% block description %}Sasso, carta, forbici contro una rete neurale che si addestra nel tuo browser sulle tue mosse. Se hai uno schema, lo trova.{% endblock %}
+
+{% block content %}
+
+<section style="padding-top: var(--sp-9); padding-bottom: var(--sp-6);">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Sfida la rete</span>
+      <h1 style="font-size: var(--fs-xxl); max-width: 22ch; margin-bottom: var(--sp-5);">
+        Sasso, carta, forbici. Contro una rete che impara.
+      </h1>
+      <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 62ch;">
+        Qui non c'è un trucco programmato: una piccola rete neurale si addestra
+        <strong style="color: var(--grafite);">nel tuo browser, a ogni tua mossa</strong>,
+        per prevedere cosa giocherai. Nei primi round tira a caso. Poi, se hai uno schema
+        — e quasi tutti ce l'hanno — comincia a leggerti.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: var(--sp-2); padding-bottom: var(--sp-8);">
+  <div class="container">
+    <div class="rps-wrap reveal">
+
+      <!-- Arena -->
+      <div class="rps-arena">
+        <div class="rps-hands">
+          <div class="rps-hand-box">
+            <div class="rps-hand" id="rps-hand-you">?</div>
+            <div class="rps-hand-label">Tu</div>
+          </div>
+          <div class="rps-vs">vs</div>
+          <div class="rps-hand-box">
+            <div class="rps-hand" id="rps-hand-net">?</div>
+            <div class="rps-hand-label">Rete</div>
+          </div>
+        </div>
+
+        <div class="rps-result" id="rps-result">Fai la prima mossa.</div>
+        <div class="rps-detail" id="rps-detail">La rete parte da zero: pesi casuali, nessun dato su di te.</div>
+
+        <div class="rps-controls">
+          <button class="rps-btn" aria-label="Gioca sasso">✊<span>Sasso</span></button>
+          <button class="rps-btn" aria-label="Gioca carta">✋<span>Carta</span></button>
+          <button class="rps-btn" aria-label="Gioca forbici">✌️<span>Forbici</span></button>
+        </div>
+      </div>
+
+      <!-- Pannello statistiche -->
+      <div class="rps-panel">
+        <div class="rps-score">
+          <div class="rps-score-item">
+            <div class="rps-score-num" id="rps-you">0</div>
+            <div class="rps-score-label">Tu</div>
+          </div>
+          <div class="rps-score-item">
+            <div class="rps-score-num" id="rps-draw">0</div>
+            <div class="rps-score-label">Pareggi</div>
+          </div>
+          <div class="rps-score-item">
+            <div class="rps-score-num" id="rps-net">0</div>
+            <div class="rps-score-label">Rete</div>
+          </div>
+        </div>
+
+        <div class="rps-read">
+          <div class="rps-read-header">
+            <span>Quanto ti sta leggendo</span>
+            <span id="rps-read-pct">33%</span>
+          </div>
+          <div class="rps-read-track">
+            <div class="rps-read-fill" id="rps-read-fill" style="width: 33%;"></div>
+          </div>
+          <div class="rps-read-note">
+            33% = tira a caso. Sopra il 50% ha trovato il tuo schema.
+          </div>
+        </div>
+
+        <div class="rps-meta">
+          <span>Round giocati: <strong id="rps-rounds">0</strong></span>
+          <button class="reset-btn" id="rps-reset">Azzera la rete</button>
+        </div>
+
+        <div class="explainer" style="margin-top: var(--sp-5);">
+          <div class="explainer-title">Cosa sta succedendo davvero</div>
+          <p>
+            Una rete neurale (9 &rarr; 14 &rarr; 3) riceve le tue ultime tre mosse e produce
+            una probabilità per la prossima. Gioca il contro della mossa più probabile.
+          </p>
+          <p>
+            A ogni round si corregge con la discesa del gradiente — la stessa matematica
+            con cui si addestrano i sistemi industriali, in miniatura. "Azzera la rete"
+            la riporta a pesi casuali: dimentica tutto.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Ponte commerciale -->
+<section class="bridge">
+  <div class="container-narrow">
+    <p class="bridge-quote reveal">
+      Se una rete così piccola impara i tuoi schemi in venti mosse,
+      <em>immagina cosa trova una rete seria nei dati della tua azienda</em>.
+    </p>
+    <div style="text-align: center; margin-top: var(--sp-6);" class="reveal">
+      <a href="{{ url_for('contact') }}" class="btn btn-secondary" style="background: var(--carta); color: var(--grafite); border-color: transparent;">
+        Parliamone
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='rps.js') }}"></script>
+{% endblock %}

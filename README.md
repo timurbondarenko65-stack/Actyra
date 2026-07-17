@@ -7,17 +7,19 @@ Flask + JavaScript vanilla. Nessuna build step, nessun bundler, nessun framework
 
 ```
 mysite/
-├── app.py                    Flask app (5 rotte + 404)
+├── app.py                    Flask app (6 rotte + 404)
 ├── Procfile                  gunicorn per Railway
 ├── requirements.txt          Flask + gunicorn
 ├── static/
 │   ├── style.css             Design system completo
 │   ├── main.js               Nav mobile + reveal on scroll
-│   └── inspector.js          Demo ispezione qualità con rete neurale
+│   ├── inspector.js          Demo ispezione qualità con rete neurale
+│   └── rps.js                Sasso-carta-forbici vs MLP addestrata live
 └── templates/
     ├── base.html             Layout con header/footer/font
     ├── index.html            Home: hero, stats mercato, tre livelli, perché Actyra, CTA
     ├── playground.html       Tecnologie: script, reti neurali (con demo), agenti LLM
+    ├── sfida.html            Sfida la rete: gioco con apprendimento reale in-browser
     ├── portfolio.html        Progetti costruiti
     ├── about.html            Il progetto (mercato, differenziazione, come lavoriamo)
     ├── contact.html          Form contatto
@@ -49,8 +51,26 @@ uno "scanner" li classifica uno a uno. Tre livelli di addestramento selezionabil
 la dimostrazione visiva del principio "più esempi vede, meno sbaglia".
 
 I contatori (ispezionati, difetti rilevati, errori, precisione) sono conteggi reali
-della sessione. Il loop si mette in pausa quando il tab non è visibile, e con
+della sessione. I pezzi si accodano dietro lo scanner quando è occupato (mai
+sovrapposti), i verdetti svaniscono dopo qualche secondo e i pezzi si dissolvono
+sul bordo destro. Il loop si mette in pausa quando il tab non è visibile, e con
 `prefers-reduced-motion` mostra un singolo pezzo statico già classificato.
+
+### La sfida (`rps.js`)
+
+Sasso-carta-forbici contro una MLP 9→14→3 con softmax che si addestra
+**davvero** nel browser: a ogni round un passo di discesa del gradiente
+(cross-entropy) sulle ultime tre mosse del giocatore. Contro uno schema
+ripetuto supera l'80% di vittorie in ~20 round; contro mosse casuali resta
+attorno al 33%, com'è giusto che sia.
+
+### Menu mobile
+
+`.site-header` ha `backdrop-filter`, che rende l'header il containing block
+dei discendenti `position: fixed`: il menu mobile è quindi un dropdown
+`position: absolute` ancorato all'header, nascosto con `visibility` +
+`opacity`. Non tornare al `position: fixed` a schermo intero senza togliere
+il backdrop-filter.
 
 ### Cosa manca ancora
 

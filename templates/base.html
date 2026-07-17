@@ -42,6 +42,7 @@
 
     <ul class="nav-links">
       <li><a href="{{ url_for('playground') }}" class="{% if active == 'playground' %}active{% endif %}">Tecnologie</a></li>
+      <li><a href="{{ url_for('sfida') }}" class="{% if active == 'sfida' %}active{% endif %}">Sfida la rete</a></li>
       <li><a href="{{ url_for('portfolio') }}" class="{% if active == 'portfolio' %}active{% endif %}">Portfolio</a></li>
       <li><a href="{{ url_for('about') }}" class="{% if active == 'about' %}active{% endif %}">Il progetto</a></li>
       <li><a href="{{ url_for('contact') }}" class="{% if active == 'contact' %}active{% endif %}">Contatto</a></li>
@@ -63,6 +64,7 @@
       <h5>Il sito</h5>
       <ul>
         <li><a href="{{ url_for('playground') }}">Tecnologie</a></li>
+        <li><a href="{{ url_for('sfida') }}">Sfida la rete</a></li>
         <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
         <li><a href="{{ url_for('about') }}">Il progetto</a></li>
         <li><a href="{{ url_for('contact') }}">Contatto</a></li>

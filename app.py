@@ -19,6 +19,11 @@ def portfolio():
     return render_template("portfolio.html", active="portfolio")
 
 
+@app.route("/sfida")
+def sfida():
+    return render_template("sfida.html", active="sfida")
+
+
 @app.route("/about")
 def about():
     return render_template("about.html", active="about")

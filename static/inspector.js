@@ -85,6 +85,10 @@
   const SPAWN_EVERY   = 2100;  // ms
   const SCAN_MS       = 750;   // pausa sotto lo scanner
 
+  const PIECE_W      = 80;   // larghezza pezzo in px
+  const MIN_GAP      = 14;   // distanza minima tra pezzi in coda
+  const BADGE_MS     = 2600; // dopo quanto il verdetto sparisce
+
   let pieces = [];
   let stats = { inspected: 0, found: 0, missed: 0, falseAlarm: 0 };
   let lastSpawn = 0;
@@ -144,6 +148,9 @@
 
     piece.badge.textContent = verdictText;
     piece.badge.classList.add('show', verdictClass);
+    // Il verdetto resta leggibile qualche secondo, poi sparisce:
+    // evita badge accatastati o tagliati sul bordo destro del nastro.
+    setTimeout(() => piece.badge.classList.remove('show'), BADGE_MS);
     updateStats(verdictText, verdictClass);
   }
 
@@ -166,24 +173,44 @@
     const dt = Math.min(ts - lastTs, 50) / 1000;
     lastTs = ts;
 
-    // Spawn
-    if (ts - lastSpawn > SPAWN_EVERY) {
+    const width = track.clientWidth;
+    const scanX = scannerCenter();
+    let scannerBusy = pieces.some(q => q.state === 'scanning');
+
+    // Spawn solo se la zona d'ingresso è libera
+    const entryClear = !pieces.some(q => q.x < PIECE_W + MIN_GAP);
+    if (ts - lastSpawn > SPAWN_EVERY && entryClear) {
       lastSpawn = ts;
       spawnPiece();
     }
 
-    const width = track.clientWidth;
-    const scanX = scannerCenter();
+    // Ordinati per posizione decrescente: si processa prima chi è più
+    // avanti, così ogni pezzo si accoda a quello immediatamente davanti.
+    const ordered = pieces.slice().sort((a, b) => b.x - a.x);
+    let aheadX = Infinity;
 
-    for (let i = pieces.length - 1; i >= 0; i--) {
-      const p = pieces[i];
-
+    for (const p of ordered) {
       if (p.state === 'moving') {
-        p.x += SPEED * dt;
-        // Arrivo allo scanner (solo se libero)
-        if (p.x + 40 >= scanX && !pieces.some(q => q.state === 'scanning')) {
+        let nx = p.x + SPEED * dt;
+
+        // 1) Non superare lo scanner se è occupato: fermarsi in attesa
+        if (scannerBusy && p.x + PIECE_W / 2 < scanX) {
+          nx = Math.min(nx, scanX - PIECE_W - MIN_GAP / 2);
+        }
+
+        // 2) Non tamponare il pezzo immediatamente davanti
+        if (aheadX < Infinity) {
+          nx = Math.min(nx, aheadX - PIECE_W - MIN_GAP);
+        }
+
+        p.x = Math.max(p.x, nx);
+
+        // Arrivo allo scanner (solo se libero): centrato, non "a occhio"
+        if (!scannerBusy && p.x + PIECE_W / 2 >= scanX - 2) {
+          p.x = scanX - PIECE_W / 2;
           p.state = 'scanning';
           p.scanT = 0;
+          scannerBusy = true;
           scanner.classList.add('active');
         }
       } else if (p.state === 'scanning') {
@@ -193,16 +220,21 @@
           p.state = 'done';
           scanner.classList.remove('active');
         }
-      } else { // done
+      } else { // done: esce dal nastro dissolvendosi sul bordo
         p.x += SPEED * dt;
-        if (p.x > width + 40) {
+        const fadeStart = width - PIECE_W - 20;
+        if (p.x > fadeStart) {
+          p.el.style.opacity = Math.max(0, 1 - (p.x - fadeStart) / PIECE_W);
+        }
+        if (p.x > width + 20) {
           p.el.remove();
-          pieces.splice(i, 1);
+          pieces.splice(pieces.indexOf(p), 1);
           continue;
         }
       }
 
       p.el.style.transform = 'translateX(' + p.x + 'px)';
+      aheadX = p.x;
     }
 
     rafId = requestAnimationFrame(tick);
