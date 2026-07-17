@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Pagina non trovata — Actyra{% endblock %}
+
+{% block content %}
+
+<section style="padding-top: var(--sp-10); padding-bottom: var(--sp-10); min-height: 60vh; display: flex; align-items: center;">
+  <div class="container-narrow" style="text-align: center;">
+    <div class="section-eyebrow">404</div>
+    <h1 style="font-size: var(--fs-xxl); margin-bottom: var(--sp-5);">
+      Questa pagina non c'è.
+    </h1>
+    <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 40ch; margin: 0 auto var(--sp-6);">
+      O è stata rimossa, o il link era rotto. Torna alla home o prova la demo.
+    </p>
+    <div style="display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;">
+      <a href="{{ url_for('index') }}" class="btn btn-primary">Home</a>
+      <a href="{{ url_for('playground') }}" class="btn btn-secondary">Playground</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

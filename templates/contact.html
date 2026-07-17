@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Contatto — Actyra{% endblock %}
+
+{% block content %}
+
+<section style="padding-top: var(--sp-9);">
+  <div class="container">
+    <div class="reveal" style="max-width: var(--container-narrow); margin: 0 auto var(--sp-8);">
+      <span class="section-eyebrow">Contatto</span>
+      <h1 style="font-size: var(--fs-xxl); margin-bottom: var(--sp-5);">
+        Parliamone.
+      </h1>
+      <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 60ch;">
+        Se hai un processo che ripeti spesso e sembra automatizzabile,
+        o solo una curiosità tecnica, scrivici. Rispondiamo entro qualche giorno.
+      </p>
+    </div>
+
+    <div class="contact-grid reveal">
+
+      <div class="contact-info">
+        <h4 style="margin-bottom: var(--sp-3); font-family: var(--font-display);">Diretto</h4>
+        <p>
+          <a href="mailto:info@actyra.it">info@actyra.it</a><br>
+          Provincia di Belluno, Veneto
+        </p>
+
+        <h4 style="margin-bottom: var(--sp-3); margin-top: var(--sp-6); font-family: var(--font-display);">Cosa dirmi</h4>
+        <p>
+          Qual è il processo, quante volte a settimana lo fai, quanto tempo ti porta via.
+          Non serve che tu sappia cos'è "l'AI giusta" per te — è il nostro lavoro capirlo.
+        </p>
+
+        <h4 style="margin-bottom: var(--sp-3); margin-top: var(--sp-6); font-family: var(--font-display);">Zona</h4>
+        <p>
+          Lavoriamo principalmente in provincia di Belluno.
+          Per progetti più ampi siamo disponibili per chiamate e riunioni da remoto.
+        </p>
+      </div>
+
+      <div>
+        {% if sent %}
+          <div class="success-msg">
+            <strong>Ricevuto.</strong>
+            Riceverai una risposta di solito entro 2 o 3 giorni lavorativi.
+          </div>
+        {% else %}
+          <form class="contact-form" method="POST" action="{{ url_for('contact') }}">
+            <div class="form-field">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" required autocomplete="name">
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+
+            <div class="form-field">
+              <label for="azienda">Azienda <span style="text-transform: none; letter-spacing: 0; color: var(--grafite-3);">(opzionale)</span></label>
+              <input type="text" id="azienda" name="azienda" autocomplete="organization">
+            </div>
+
+            <div class="form-field">
+              <label for="messaggio">Cosa vorresti fare</label>
+              <textarea id="messaggio" name="messaggio" rows="5" required placeholder="Descrivi il processo che vorresti automatizzare, o la curiosità tecnica che ti frulla in testa."></textarea>
+            </div>
+
+            <div style="margin-top: var(--sp-3);">
+              <button type="submit" class="btn btn-primary">
+                Invia
+                <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

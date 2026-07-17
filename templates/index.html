@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}Actyra — Automazioni su misura per PMI del Nordest{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="reveal">
+      <span class="hero-eyebrow">Studio di automazione &middot; Provincia di Belluno</span>
+      <h1 class="hero-title">Automazioni <em>su misura</em> per PMI e professionisti.</h1>
+      <p class="hero-lede">
+        Actyra costruisce lo strumento tecnico giusto per ogni processo: script che fanno
+        risparmiare ore, agenti che leggono documenti al posto tuo, reti neurali addestrate
+        da zero. Non la stessa soluzione venduta a tutti — quella adatta al problema che hai davvero.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ url_for('playground') }}" class="btn btn-primary">
+          Prova la demo
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="{{ url_for('portfolio') }}" class="btn btn-secondary">Vedi cosa abbiamo costruito</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATISTICHE DI MERCATO -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-block reveal">
+        <div class="stat-num">5,64<span class="stat-unit">mld €</span></div>
+        <div class="stat-label">Produzione del distretto occhialeria bellunese <span class="stat-src">— ANFAO, 2025</span></div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num">13.941</div>
+        <div class="stat-label">Aziende attive in provincia di Belluno, in larga parte micro e piccole</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num">514</div>
+        <div class="stat-label">Imprese bellunesi che già usano l'AI — 1 su 4 sopra la media nazionale <span class="stat-src">— Confartigianato</span></div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-num">1,4<span class="stat-unit">mln €</span></div>
+        <div class="stat-label">Fondi camerali attivi per consulenza e software AI alle PMI del territorio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- I TRE LIVELLI -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Come lavoriamo</span>
+      <h2 class="section-title">Tre livelli, secondo cosa serve davvero.</h2>
+      <p class="section-intro">
+        Non tutti i problemi hanno bisogno della stessa AI.
+        Alcuni si risolvono con uno script di trenta righe. Altri con un modello linguistico
+        collegato ai tuoi dati. Altri ancora — pochi — con una rete neurale addestrata su misura.
+        La proposta indica sempre, con onestà, quale livello serve al caso concreto.
+      </p>
+    </div>
+
+    <div class="livelli-grid">
+      <article class="livello-card reveal">
+        <div class="livello-num">Livello 01</div>
+        <h3 class="livello-titolo">Agenti e automazioni rapide</h3>
+        <p class="livello-desc">
+          Modelli linguistici open-source collegati via API a processi reali: email,
+          preventivi, documenti, comunicazione clienti e fornitori. Flussi che girano
+          da soli e ti tolgono ore ripetitive dalla settimana.
+        </p>
+        <div class="livello-tempo">Operativo in giorni</div>
+      </article>
+
+      <article class="livello-card reveal">
+        <div class="livello-num">Livello 02</div>
+        <h3 class="livello-titolo">Adattamento su misura</h3>
+        <p class="livello-desc">
+          Quando serve più precisione: recupero delle informazioni dai tuoi documenti (RAG),
+          fine-tuning leggero sul linguaggio della tua azienda. La differenza tra una risposta
+          generica e una che sa di cosa parla.
+        </p>
+        <div class="livello-tempo">Da qualche settimana</div>
+      </article>
+
+      <article class="livello-card reveal">
+        <div class="livello-num">Livello 03</div>
+        <h3 class="livello-titolo">Architetture dedicate</h3>
+        <p class="livello-desc">
+          Reti neurali su misura per problemi specifici: riconoscimento di difetti visivi,
+          modelli predittivi sui tuoi dati. Progetti seri, che richiedono tempo e fiducia
+          reciproca. Non si vendono in un preventivo di due pagine.
+        </p>
+        <div class="livello-tempo">Orizzonte medio</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="bridge">
+  <div class="container-narrow">
+    <p class="bridge-quote reveal">
+      Nella demo dal vivo una rete neurale ispeziona componenti
+      e trova i difetti <em>senza che nessuno le abbia scritto cos'è un difetto</em>.
+      È lo stesso principio che portiamo sulle linee di produzione reali.
+    </p>
+    <div class="bridge-attribution reveal">Guardala lavorare &rarr;</div>
+    <div style="text-align: center; margin-top: var(--sp-5);" class="reveal">
+      <a href="{{ url_for('playground') }}" class="btn btn-secondary" style="background: var(--carta); color: var(--grafite); border-color: transparent;">
+        Guarda le tecnologie in azione
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHÉ ACTYRA -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Perché Actyra</span>
+      <h2 class="section-title">Perché scegliere questo studio.</h2>
+    </div>
+    <div class="perche-grid">
+      <article class="perche-card reveal">
+        <h3 class="perche-titolo">Costruiamo, non rivendiamo</h3>
+        <p class="perche-desc">
+          Niente licenze di piattaforme terze rivendute con ricarico. Ogni soluzione è
+          scritta su misura, con stack open-source: il codice e i dati restano dell'azienda,
+          senza vendor lock-in.
+        </p>
+      </article>
+      <article class="perche-card reveal">
+        <h3 class="perche-titolo">Dimensione giusta per le PMI</h3>
+        <p class="perche-desc">
+          I grandi system integrator partono da budget a sei cifre. Actyra serve
+          progetti piccoli e medi con tempi corti e costi proporzionati — il segmento
+          che nessun altro presidia sul territorio.
+        </p>
+      </article>
+      <article class="perche-card reveal">
+        <h3 class="perche-titolo">Preventivo chiaro, rischio esplicito</h3>
+        <p class="perche-desc">
+          Ogni proposta dice cosa viene consegnato, in quanto tempo, a che prezzo,
+          e cosa succede se non funziona. Se basta uno script da trenta righe,
+          la proposta dice quello.
+        </p>
+      </article>
+      <article class="perche-card reveal">
+        <h3 class="perche-titolo">Un solo interlocutore tecnico</h3>
+        <p class="perche-desc">
+          Chi analizza il processo è chi scrive il codice ed è chi risponde dopo la
+          consegna. Niente passaggi tra commerciale, project manager e sviluppatori:
+          meno attriti, decisioni più rapide.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO PREVIEW -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Cosa abbiamo costruito</span>
+      <h2 class="section-title">Progetti reali, tecnologia proprietaria.</h2>
+      <p class="section-intro">
+        Reti neurali, agenti e pipeline di automazione costruiti da zero, non assemblati
+        da servizi terzi. È la base tecnica su cui poggiano i progetti per i clienti.
+      </p>
+      <a href="{{ url_for('portfolio') }}" class="btn btn-secondary">
+        Guarda il portfolio
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="cta-final">
+  <div class="container-narrow" style="text-align: center;">
+    <div class="reveal">
+      <h2 style="font-size: var(--fs-xl); max-width: 24ch; margin: 0 auto var(--sp-5); letter-spacing: -0.02em;">
+        Un processo ripetitivo è un preventivo che aspetta.
+      </h2>
+      <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 52ch; margin: 0 auto var(--sp-6);">
+        Descrivi il processo, quante volte si ripete, quanto tempo porta via.
+        La prima analisi è senza impegno.
+      </p>
+      <a href="{{ url_for('contact') }}" class="btn btn-primary">
+        Richiedi un'analisi
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

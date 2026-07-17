@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio — Actyra{% endblock %}
+{% block description %}Progetti e dimostratori Actyra: ispezione qualità con rete neurale, agenti documentali, automazione di preventivi e report. Tecnologia costruita, non rivenduta.{% endblock %}
+
+{% block content %}
+
+<section style="padding-top: var(--sp-9);">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-eyebrow">Cosa abbiamo costruito</span>
+      <h1 style="font-size: var(--fs-xxl); max-width: 20ch; margin-bottom: var(--sp-5);">
+        Progetti reali, tecnologia proprietaria.
+      </h1>
+      <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 62ch;">
+        Dimostratori e progetti interni che coprono l'intera offerta: automazione documentale,
+        agenti basati su modelli linguistici, visione artificiale. Ogni progetto è costruito
+        da zero ed è la base tecnica di ciò che consegniamo ai clienti.
+      </p>
+    </div>
+
+    <div class="progetti-grid">
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Computer Vision · demo dal vivo</div>
+        <h3 class="progetto-titolo">Ispezione qualità in-browser</h3>
+        <p class="progetto-desc">
+          Simulazione interattiva di una linea di controllo qualità: componenti di occhialeria
+          su un nastro, una rete neurale che li classifica in tempo reale, e la precisione
+          che cresce col livello di addestramento. Tutto gira nel browser, senza server.
+          <a href="{{ url_for('playground') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">Guardala lavorare &rarr;</a>
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">SVG</span>
+          <span class="tech-tag">Classificazione</span>
+        </div>
+      </article>
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Agenti LLM · dimostratore</div>
+        <h3 class="progetto-titolo">Agente documentale</h3>
+        <p class="progetto-desc">
+          Un agente basato su modelli linguistici open-source che legge preventivi, ordini
+          e DDT in arrivo via email, estrae i dati rilevanti (cliente, importi, scadenze)
+          e li porta nel gestionale, segnalando le incongruenze invece di ricopiarle.
+          Il collo di bottiglia amministrativo più comune nelle PMI.
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">LLM open-source</span>
+          <span class="tech-tag">RAG</span>
+        </div>
+      </article>
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Automazione · dimostratore</div>
+        <h3 class="progetto-titolo">Preventivi in minuti, non in serate</h3>
+        <p class="progetto-desc">
+          Flusso automatico che parte dalla richiesta del cliente, recupera listini e
+          storico ordini, prepara la bozza di preventivo e la mette in coda per
+          l'approvazione del titolare. La persona decide, la macchina prepara.
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">API</span>
+          <span class="tech-tag">Flussi agentici</span>
+        </div>
+      </article>
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Dati · dimostratore</div>
+        <h3 class="progetto-titolo">Report automatici sui dati aziendali</h3>
+        <p class="progetto-desc">
+          Script che aggregano dati da fogli di calcolo e gestionali diversi e producono
+          un report leggibile a cadenza fissa: vendite, margini, anomalie sui costi.
+          Le decisioni si prendono sui numeri della propria azienda, non a sensazione.
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">Reportistica</span>
+        </div>
+      </article>
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Ricerca applicata</div>
+        <h3 class="progetto-titolo">Rilevamento difetti su superfici</h3>
+        <p class="progetto-desc">
+          Studio in corso sui benchmark industriali di anomaly detection (MVTec AD 2, VisA)
+          e su dataset reali di minuteria e componenti: la base per portare il controllo
+          qualità visivo su misura nelle produzioni del territorio.
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">Anomaly detection</span>
+          <span class="tech-tag">In corso</span>
+        </div>
+      </article>
+
+      <article class="progetto-card reveal">
+        <div class="progetto-tag">Prossimamente</div>
+        <h3 class="progetto-titolo">Primo caso studio industriale</h3>
+        <p class="progetto-desc">
+          Un progetto in azienda, con dataset reali su minuteria e componenti,
+          sarà pubblicato qui quando sarà pronto. Se hai un processo che ripeti tutti i giorni
+          e sembra automatizzabile, <a href="{{ url_for('contact') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">parliamone</a> —
+          può diventare il caso studio numero uno.
+        </p>
+        <div class="progetto-tech">
+          <span class="tech-tag">In preparazione</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
