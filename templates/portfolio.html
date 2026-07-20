@@ -1,118 +1,267 @@
 {% extends "base.html" %}
 
 {% block title %}Portfolio — Actyra{% endblock %}
-{% block description %}Progetti e dimostratori Actyra: ispezione qualità con rete neurale, agenti documentali, automazione di preventivi e report. Tecnologia costruita, non rivenduta.{% endblock %}
+{% block description %}Tre architetture concrete per i pain point reali dell'occhialeria e delle PMI bellunesi: automazione preventivi, controllo qualità visivo, lettura automatica di ordini e DDT. Problema, soluzione, tempi, ROI.{% endblock %}
 
 {% block content %}
 
 <section style="padding-top: var(--sp-9);">
   <div class="container">
-    <div class="reveal">
-      <span class="section-eyebrow">Cosa abbiamo costruito</span>
-      <h1 style="font-size: var(--fs-xxl); max-width: 20ch; margin-bottom: var(--sp-5);">
-        Progetti reali, tecnologia proprietaria.
+
+    <div class="reveal" style="max-width: 64ch;">
+      <span class="section-eyebrow">Portfolio</span>
+      <h1 style="font-size: var(--fs-xxl); max-width: 22ch; margin-bottom: var(--sp-5);">
+        Architetture che costruiamo, sui problemi che il territorio ha davvero.
       </h1>
-      <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 62ch;">
-        Dimostratori e progetti interni che coprono l'intera offerta: automazione documentale,
-        agenti basati su modelli linguistici, visione artificiale. Ogni progetto è costruito
-        da zero ed è la base tecnica di ciò che consegniamo ai clienti.
+      <p style="font-size: var(--fs-md); color: var(--grafite-2); line-height: 1.7;">
+        Questi non sono ancora clienti reali &mdash; il portafoglio si sta costruendo adesso.
+        Sono <strong style="color: var(--grafite); font-weight: 500;">soluzioni concrete per problemi
+        concreti</strong> del distretto dell'occhialeria e delle PMI della provincia di Belluno,
+        con architettura, tempi e ritorno stimato. Se riconosci uno di questi processi, è esattamente
+        il tipo di lavoro che facciamo.
       </p>
     </div>
 
-    <div class="progetti-grid">
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Computer Vision · demo dal vivo</div>
-        <h3 class="progetto-titolo">Ispezione qualità in-browser</h3>
-        <p class="progetto-desc">
-          Simulazione interattiva di una linea di controllo qualità: componenti di occhialeria
-          su un nastro, una rete neurale che li classifica in tempo reale, e la precisione
-          che cresce col livello di addestramento. Tutto gira nel browser, senza server.
-          <a href="{{ url_for('playground') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">Guardala lavorare &rarr;</a>
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">JavaScript</span>
-          <span class="tech-tag">SVG</span>
-          <span class="tech-tag">Classificazione</span>
-        </div>
-      </article>
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Agenti LLM · dimostratore</div>
-        <h3 class="progetto-titolo">Agente documentale</h3>
-        <p class="progetto-desc">
-          Un agente basato su modelli linguistici open-source che legge preventivi, ordini
-          e DDT in arrivo via email, estrae i dati rilevanti (cliente, importi, scadenze)
-          e li porta nel gestionale, segnalando le incongruenze invece di ricopiarle.
-          Il collo di bottiglia amministrativo più comune nelle PMI.
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">LLM open-source</span>
-          <span class="tech-tag">RAG</span>
-        </div>
-      </article>
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Automazione · dimostratore</div>
-        <h3 class="progetto-titolo">Preventivi in minuti, non in serate</h3>
-        <p class="progetto-desc">
-          Flusso automatico che parte dalla richiesta del cliente, recupera listini e
-          storico ordini, prepara la bozza di preventivo e la mette in coda per
-          l'approvazione del titolare. La persona decide, la macchina prepara.
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">API</span>
-          <span class="tech-tag">Flussi agentici</span>
-        </div>
-      </article>
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Dati · dimostratore</div>
-        <h3 class="progetto-titolo">Report automatici sui dati aziendali</h3>
-        <p class="progetto-desc">
-          Script che aggregano dati da fogli di calcolo e gestionali diversi e producono
-          un report leggibile a cadenza fissa: vendite, margini, anomalie sui costi.
-          Le decisioni si prendono sui numeri della propria azienda, non a sensazione.
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Pandas</span>
-          <span class="tech-tag">Reportistica</span>
-        </div>
-      </article>
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Ricerca applicata</div>
-        <h3 class="progetto-titolo">Rilevamento difetti su superfici</h3>
-        <p class="progetto-desc">
-          Studio in corso sui benchmark industriali di anomaly detection (MVTec AD 2, VisA)
-          e su dataset reali di minuteria e componenti: la base per portare il controllo
-          qualità visivo su misura nelle produzioni del territorio.
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">PyTorch</span>
-          <span class="tech-tag">Anomaly detection</span>
-          <span class="tech-tag">In corso</span>
-        </div>
-      </article>
-
-      <article class="progetto-card reveal">
-        <div class="progetto-tag">Prossimamente</div>
-        <h3 class="progetto-titolo">Primo caso studio industriale</h3>
-        <p class="progetto-desc">
-          Un progetto in azienda, con dataset reali su minuteria e componenti,
-          sarà pubblicato qui quando sarà pronto. Se hai un processo che ripeti tutti i giorni
-          e sembra automatizzabile, <a href="{{ url_for('contact') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">parliamone</a> —
-          può diventare il caso studio numero uno.
-        </p>
-        <div class="progetto-tech">
-          <span class="tech-tag">In preparazione</span>
-        </div>
-      </article>
-
+    <!-- Pain point del distretto -->
+    <div class="pain-block reveal">
+      <div class="pain-eyebrow">I pain point ricorrenti nell'occhialeria bellunese</div>
+      <ol class="pain-list">
+        <li><span class="pain-n">01</span><span>Lettura manuale di DDT, ordini e preventivi, con data entry nel gestionale &mdash; ore perse ed errori di trascrizione.</span></li>
+        <li><span class="pain-n">02</span><span>Generazione preventivi a mano &mdash; template in Word, calcoli in Excel, tempo che si accumula ogni settimana.</span></li>
+        <li><span class="pain-n">03</span><span>Controllo qualità visivo su componenti in plastica e minuteria metallica &mdash; aste, frontali, terminali, morsetti.</span></li>
+        <li><span class="pain-n">04</span><span>Reportistica sui difetti per la tracciabilità verso i grandi committenti.</span></li>
+        <li><span class="pain-n">05</span><span>Follow-up clienti: conferme d'ordine e stato spedizione, gestiti a mano una mail alla volta.</span></li>
+      </ol>
     </div>
+
+    <!-- ============ CASE STUDY 1 ============ -->
+    <article class="case-study reveal">
+      <div class="case-thumb thumb-preventivi" aria-hidden="true">
+        <div class="tp-mail">
+          <div class="tp-mail-flap"></div>
+          <div class="tp-mail-line"></div>
+          <div class="tp-mail-line short"></div>
+        </div>
+        <div class="tp-flow tp-flow-1"></div>
+        <div class="tp-agent">
+          <div class="tp-agent-ring"></div>
+          <span>AI</span>
+        </div>
+        <div class="tp-flow tp-flow-2"></div>
+        <div class="tp-pdf">
+          <div class="tp-pdf-badge">€</div>
+          <div class="tp-pdf-line"></div>
+          <div class="tp-pdf-line"></div>
+          <div class="tp-pdf-line short"></div>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-head">
+          <span class="case-level level-1">Livello 1 · Agenti</span>
+          <h2 class="case-title">Automazione preventivi</h2>
+          <p class="case-type">Terzista occhialeria &mdash; generazione preventivi</p>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <h4>La situazione oggi</h4>
+            <p>
+              Un'azienda di componenti in plastica riceve 15&ndash;20 richieste di preventivo
+              a settimana. Arriva una mail (&laquo;quantità X di aste, frontali, naselli&raquo;),
+              si apre l'Excel dei prezzi, si scrive il preventivo in Word, si risponde.
+              <strong>20&ndash;30 minuti a preventivo &times; 15 = 7&ndash;8 ore/settimana</strong>,
+              più 2&ndash;3 ore di correzioni quando un prezzo esce sbagliato.
+            </p>
+          </div>
+          <div class="case-col">
+            <h4>Cosa costruiamo</h4>
+            <p>Un agente che, alla ricezione della richiesta:</p>
+            <ul class="case-steps">
+              <li>legge quantità e tipo di componente (RAG sul listino)</li>
+              <li>calcola il prezzo: base + sconti volume + margine</li>
+              <li>genera il PDF con la carta intestata aziendale</li>
+              <li>invia la mail al cliente in automatico</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="case-result">
+          <div class="result-item"><span class="result-num">2&ndash;3h</span><span class="result-lbl">a settimana, solo l'approvazione finale (da 7&ndash;8h)</span></div>
+          <div class="result-item"><span class="result-num">0</span><span class="result-lbl">errori di calcolo</span></div>
+          <div class="result-item"><span class="result-num">&lt; 2h</span><span class="result-lbl">dalla mail al preventivo (invece di 1&ndash;2 giorni)</span></div>
+        </div>
+
+        <div class="case-meta">
+          <div class="meta-pair"><span class="meta-k">Timeline</span><span class="meta-v">3&ndash;4 settimane</span></div>
+          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">~5 ore/settimana, ~1 mese di lavoro l'anno</span></div>
+          <div class="meta-pair meta-tech">
+            <span class="meta-k">Stack</span>
+            <span class="case-tags">
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">Qwen2.5</span>
+              <span class="tech-tag">PDF template</span>
+              <span class="tech-tag">RAG listino</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ CASE STUDY 2 ============ -->
+    <article class="case-study reveal">
+      <div class="case-thumb thumb-vision" aria-hidden="true">
+        <div class="tv-belt">
+          <div class="tv-piece p1"></div>
+          <div class="tv-piece p2 defect"></div>
+          <div class="tv-piece p3"></div>
+        </div>
+        <div class="tv-scanzone">
+          <div class="tv-beam"></div>
+        </div>
+        <div class="tv-verdict tv-ok">OK</div>
+        <div class="tv-verdict tv-bad">SCARTO</div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-head">
+          <span class="case-level level-3">Livello 3 · Computer Vision</span>
+          <h2 class="case-title">Controllo qualità visivo</h2>
+          <p class="case-type">Microsupplier di minuteria metallica &mdash; difetti sui componenti</p>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <h4>La situazione oggi</h4>
+            <p>
+              Aste, morsetti e minuteria in metallo: ogni pezzo passa un controllo ottico
+              prima di spedire. Oggi un operatore li esamina alla luce, per
+              <strong>6&ndash;8 ore al giorno (~2.500&euro;/mese)</strong>. A fine turno,
+              quando la stanchezza sale, gli sfugge il 15&ndash;20% dei difetti &mdash;
+              e il cliente reclama &laquo;mi arriva con il graffio&raquo;.
+            </p>
+          </div>
+          <div class="case-col">
+            <h4>Cosa costruiamo</h4>
+            <p>
+              Una rete neurale addestrata su foto di componenti buoni e difettosi, che
+              ispeziona ogni pezzo via telecamera prima della spedizione.
+            </p>
+            <ul class="case-steps">
+              <li>difetto rilevato &rarr; avviso all'operatore, pezzo a scarto</li>
+              <li>ogni pezzo lascia una foto e un verdetto tracciabili</li>
+              <li>l'operatore lavora solo sui casi dubbi, non su tutto</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="case-result">
+          <div class="result-item"><span class="result-num">98%+</span><span class="result-lbl">difetti intercettati (vs 80&ndash;85% a fine turno)</span></div>
+          <div class="result-item"><span class="result-num">2&ndash;3h</span><span class="result-lbl">di controllo al giorno, solo sui sospetti (da 6&ndash;8h)</span></div>
+          <div class="result-item"><span class="result-num">100%</span><span class="result-lbl">tracciabilità: foto + verdetto per ogni pezzo</span></div>
+        </div>
+
+        <div class="case-meta">
+          <div class="meta-pair"><span class="meta-k">Timeline</span><span class="meta-v">6&ndash;8 settimane (dati, training, installazione)</span></div>
+          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">payback in 3&ndash;5 mesi</span></div>
+          <div class="meta-pair meta-tech">
+            <span class="meta-k">Stack</span>
+            <span class="case-tags">
+              <span class="tech-tag">YOLOv8 / CNN</span>
+              <span class="tech-tag">Camera industriale</span>
+              <span class="tech-tag">Edge device</span>
+              <span class="tech-tag">Monitoring</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ CASE STUDY 3 ============ -->
+    <article class="case-study reveal">
+      <div class="case-thumb thumb-ocr" aria-hidden="true">
+        <div class="to-doc">
+          <div class="to-doc-line"></div>
+          <div class="to-doc-line"></div>
+          <div class="to-doc-line short"></div>
+          <div class="to-doc-line"></div>
+          <div class="to-doc-line short"></div>
+          <div class="to-scan"></div>
+        </div>
+        <div class="to-fields">
+          <div class="to-field f1"><span class="to-key">Fornitore</span><span class="to-val"></span></div>
+          <div class="to-field f2"><span class="to-key">Quantità</span><span class="to-val"></span></div>
+          <div class="to-field f3"><span class="to-key">Prezzo</span><span class="to-val"></span></div>
+          <div class="to-field f4"><span class="to-key">Data</span><span class="to-val"></span></div>
+        </div>
+      </div>
+
+      <div class="case-body">
+        <div class="case-head">
+          <span class="case-level level-1">Livello 1 · RAG + OCR</span>
+          <h2 class="case-title">Lettura automatica di ordini e DDT</h2>
+          <p class="case-type">Gestione ordini fornitori &mdash; data entry</p>
+        </div>
+
+        <div class="case-cols">
+          <div class="case-col">
+            <h4>La situazione oggi</h4>
+            <p>
+              Decine di ordini da fornitori diversi &mdash; PDF, foto, allegati mail. Un operatore
+              legge ogni ordine e trascrive fornitore, quantità, prezzo e data nel gestionale.
+              <strong>2&ndash;3 minuti a ordine &times; 50&ndash;60 a settimana = 2&ndash;3 ore/settimana</strong>,
+              con il rischio costante di una quantità scambiata o una data letta male.
+            </p>
+          </div>
+          <div class="case-col">
+            <h4>Cosa costruiamo</h4>
+            <p>Un sistema che riceve il documento e:</p>
+            <ul class="case-steps">
+              <li>estrae il testo con OCR, anche da foto e scansioni</li>
+              <li>legge fornitore, quantità, prezzo unitario, data prevista</li>
+              <li>popola il gestionale via API</li>
+              <li>se qualcosa è ambiguo, chiede conferma invece di indovinare</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="case-result">
+          <div class="result-item"><span class="result-num">~20 min</span><span class="result-lbl">a settimana di sola verifica (da 2&ndash;3h)</span></div>
+          <div class="result-item"><span class="result-num">0</span><span class="result-lbl">errori di trascrizione</span></div>
+          <div class="result-item"><span class="result-num">&lt; 5 min</span><span class="result-lbl">dall'arrivo all'inserimento (invece di 1&ndash;2 giorni)</span></div>
+        </div>
+
+        <div class="case-meta">
+          <div class="meta-pair"><span class="meta-k">Timeline</span><span class="meta-v">2&ndash;3 settimane</span></div>
+          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">~150 ore/anno recuperate</span></div>
+          <div class="meta-pair meta-tech">
+            <span class="meta-k">Stack</span>
+            <span class="case-tags">
+              <span class="tech-tag">OCR (Tesseract)</span>
+              <span class="tech-tag">Qwen2.5</span>
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">API gestionale</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chiusura -->
+    <div class="case-cta reveal">
+      <h3>Riconosci uno di questi processi nella tua azienda?</h3>
+      <p>
+        Allora sappiamo già da dove partire. Il primo caso studio reale, con dati veri
+        del territorio, verrà pubblicato qui appena sarà pronto &mdash; può essere il tuo.
+      </p>
+      <a href="{{ url_for('contact') }}" class="btn btn-primary">
+        Parliamone
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </section>
 
