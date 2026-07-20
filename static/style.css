@@ -1584,139 +1584,145 @@ section {
   .case-thumb *::after { animation: none !important; }
 }
 
-/* Thumb 1 — preventivi (mail -> agent -> pdf) */
+/* Thumb 1 — preventivi (documento che si compila da solo) */
 .thumb-preventivi {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
   padding: var(--sp-6);
 }
 
-.tp-mail, .tp-pdf {
-  width: 62px;
-  height: 76px;
-  border-radius: 6px;
-  position: relative;
-  flex-shrink: 0;
+.tp-doc {
+  width: 190px;
+  background: rgba(246, 245, 241, 0.055);
+  border: 1.5px solid rgba(246, 245, 241, 0.32);
+  border-radius: 8px;
+  padding: 14px 15px 15px;
+  box-shadow: 0 18px 34px -22px rgba(0, 0, 0, 0.7);
+  animation: tpDocIn 5.4s ease-in-out infinite;
 }
 
-.tp-mail {
-  background: rgba(246, 245, 241, 0.08);
-  border: 1.5px solid rgba(246, 245, 241, 0.4);
-  animation: tpMailIn 4.4s ease-in-out infinite;
-}
-
-.tp-mail-flap {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 26px;
-  border-bottom: 1.5px solid rgba(246, 245, 241, 0.4);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: rgba(246, 245, 241, 0.06);
-}
-
-.tp-mail-line {
-  position: absolute;
-  left: 12px; right: 12px;
-  height: 3px;
-  border-radius: 2px;
-  background: rgba(246, 245, 241, 0.3);
-  top: 44px;
-}
-.tp-mail-line.short { top: 54px; right: 26px; }
-
-.tp-agent {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  background: rgba(31, 75, 72, 0.35);
-  border: 1.5px solid var(--ottone);
+.tp-doc-head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--carta);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  position: relative;
-  flex-shrink: 0;
-  z-index: 2;
+  justify-content: space-between;
+  padding-bottom: 11px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(246, 245, 241, 0.14);
 }
 
-.tp-agent-ring {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1.5px solid var(--ottone);
-  opacity: 0;
-  animation: tpPulse 4.4s ease-out infinite;
-}
-
-.tp-flow {
-  height: 2px;
-  width: 46px;
-  flex-shrink: 0;
-  position: relative;
-  background: linear-gradient(90deg, rgba(246,245,241,0.18), rgba(246,245,241,0.18)), linear-gradient(90deg, transparent 0%, var(--ottone) 50%, transparent 100%);
-  background-size: 100% 100%, 45% 100%;
-  background-repeat: no-repeat, no-repeat;
-  background-position: 0 0, -45% 0;
-}
-.tp-flow-1 { animation: tpSweep 4.4s ease-in-out infinite; }
-.tp-flow-2 { animation: tpSweep 4.4s ease-in-out infinite; animation-delay: 0.4s; }
-
-.tp-pdf {
-  background: rgba(246, 245, 241, 0.08);
-  border: 1.5px solid rgba(246, 245, 241, 0.4);
-  animation: tpPdfIn 4.4s ease-in-out infinite;
-}
-
-.tp-pdf-badge {
-  position: absolute;
-  top: -8px; right: -8px;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--ottone);
-  color: var(--grafite);
-  display: flex; align-items: center; justify-content: center;
+.tp-doc-title {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  color: var(--carta);
+  letter-spacing: -0.01em;
 }
 
-.tp-pdf-line {
-  position: absolute;
-  left: 11px; right: 11px;
-  height: 3px;
-  border-radius: 2px;
+.tp-doc-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--grafite);
+  background: var(--ottone);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+
+.tp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+.tp-lbl {
+  height: 7px;
+  border-radius: 3px;
   background: rgba(246, 245, 241, 0.28);
+  flex: 1;
 }
-.tp-pdf .tp-pdf-line:nth-of-type(2) { top: 22px; }
-.tp-pdf .tp-pdf-line:nth-of-type(3) { top: 34px; }
-.tp-pdf .tp-pdf-line.short { top: 46px; right: 24px; }
+.tp-r1 .tp-lbl { max-width: 88px; }
+.tp-r2 .tp-lbl { max-width: 104px; }
+.tp-r3 .tp-lbl { max-width: 74px; }
 
-@keyframes tpMailIn {
-  0% { opacity: 0; transform: translateX(6px) scale(0.92); }
-  7% { opacity: 1; transform: translateX(0) scale(1); }
-  42% { opacity: 1; transform: translateX(0) scale(1); }
-  54% { opacity: 0; transform: translateX(0) scale(0.96); }
-  100% { opacity: 0; transform: translateX(0) scale(0.96); }
+.tp-price {
+  width: 30px;
+  height: 7px;
+  border-radius: 3px;
+  background: rgba(246, 245, 241, 0.5);
+  flex-shrink: 0;
 }
-@keyframes tpPdfIn {
-  0%, 50% { opacity: 0; transform: translateX(-6px) scale(0.92); }
-  60% { opacity: 1; transform: translateX(0) scale(1); }
-  90% { opacity: 1; transform: translateX(0) scale(1); }
-  98%, 100% { opacity: 0; transform: translateX(0) scale(0.96); }
+
+.tp-r1 { animation: tpRow1 5.4s ease-in-out infinite; }
+.tp-r2 { animation: tpRow2 5.4s ease-in-out infinite; }
+.tp-r3 { animation: tpRow3 5.4s ease-in-out infinite; }
+
+.tp-rule {
+  height: 1.5px;
+  background: rgba(246, 245, 241, 0.22);
+  border-radius: 2px;
+  margin: 13px 0 12px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: tpRule 5.4s ease-in-out infinite;
 }
-@keyframes tpSweep {
-  0% { background-position: 0 0, -45% 0; }
-  100% { background-position: 0 0, 145% 0; }
+
+.tp-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  opacity: 0;
+  animation: tpTotal 5.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
-@keyframes tpPulse {
-  0% { transform: scale(0.9); opacity: 0.55; }
-  70% { transform: scale(1.28); opacity: 0; }
-  100% { transform: scale(1.28); opacity: 0; }
+
+.tp-total-lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(246, 245, 241, 0.6);
+}
+
+.tp-total-val {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--ottone);
+  letter-spacing: -0.01em;
+}
+
+@keyframes tpDocIn {
+  0% { opacity: 0; transform: translateY(8px) scale(0.97); }
+  6% { opacity: 1; transform: translateY(0) scale(1); }
+  90% { opacity: 1; transform: translateY(0) scale(1); }
+  98%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+@keyframes tpRow1 {
+  0%, 10% { opacity: 0; transform: translateX(-7px); }
+  17%, 90% { opacity: 1; transform: translateX(0); }
+  97%, 100% { opacity: 0; transform: translateX(0); }
+}
+@keyframes tpRow2 {
+  0%, 22% { opacity: 0; transform: translateX(-7px); }
+  29%, 90% { opacity: 1; transform: translateX(0); }
+  97%, 100% { opacity: 0; transform: translateX(0); }
+}
+@keyframes tpRow3 {
+  0%, 34% { opacity: 0; transform: translateX(-7px); }
+  41%, 90% { opacity: 1; transform: translateX(0); }
+  97%, 100% { opacity: 0; transform: translateX(0); }
+}
+@keyframes tpRule {
+  0%, 48% { transform: scaleX(0); opacity: 1; }
+  58%, 90% { transform: scaleX(1); opacity: 1; }
+  97%, 100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes tpTotal {
+  0%, 60% { opacity: 0; transform: scale(0.7); }
+  70% { opacity: 1; transform: scale(1); }
+  90% { opacity: 1; transform: scale(1); }
+  97%, 100% { opacity: 0; transform: scale(1); }
 }
 
 /* Thumb 2 — computer vision (belt + beam) */
