@@ -1604,6 +1604,7 @@ section {
 .tp-mail {
   background: rgba(246, 245, 241, 0.08);
   border: 1.5px solid rgba(246, 245, 241, 0.4);
+  animation: tpMailIn 4.4s ease-in-out infinite;
 }
 
 .tp-mail-flap {
@@ -1649,7 +1650,7 @@ section {
   border-radius: 50%;
   border: 1.5px solid var(--ottone);
   opacity: 0;
-  animation: tpPulse 4s ease-out infinite;
+  animation: tpPulse 4.4s ease-out infinite;
 }
 
 .tp-flow {
@@ -1662,12 +1663,13 @@ section {
   background-repeat: no-repeat, no-repeat;
   background-position: 0 0, -45% 0;
 }
-.tp-flow-1 { animation: tpSweep 3.2s linear infinite; }
-.tp-flow-2 { animation: tpSweep 3.2s linear infinite; animation-delay: 0.35s; }
+.tp-flow-1 { animation: tpSweep 4.4s ease-in-out infinite; }
+.tp-flow-2 { animation: tpSweep 4.4s ease-in-out infinite; animation-delay: 0.4s; }
 
 .tp-pdf {
   background: rgba(246, 245, 241, 0.08);
   border: 1.5px solid rgba(246, 245, 241, 0.4);
+  animation: tpPdfIn 4.4s ease-in-out infinite;
 }
 
 .tp-pdf-badge {
@@ -1694,6 +1696,19 @@ section {
 .tp-pdf .tp-pdf-line:nth-of-type(3) { top: 34px; }
 .tp-pdf .tp-pdf-line.short { top: 46px; right: 24px; }
 
+@keyframes tpMailIn {
+  0% { opacity: 0; transform: translateX(6px) scale(0.92); }
+  7% { opacity: 1; transform: translateX(0) scale(1); }
+  42% { opacity: 1; transform: translateX(0) scale(1); }
+  54% { opacity: 0; transform: translateX(0) scale(0.96); }
+  100% { opacity: 0; transform: translateX(0) scale(0.96); }
+}
+@keyframes tpPdfIn {
+  0%, 50% { opacity: 0; transform: translateX(-6px) scale(0.92); }
+  60% { opacity: 1; transform: translateX(0) scale(1); }
+  90% { opacity: 1; transform: translateX(0) scale(1); }
+  98%, 100% { opacity: 0; transform: translateX(0) scale(0.96); }
+}
 @keyframes tpSweep {
   0% { background-position: 0 0, -45% 0; }
   100% { background-position: 0 0, 145% 0; }
