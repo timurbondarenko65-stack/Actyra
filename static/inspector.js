@@ -1,12 +1,15 @@
 // ================================================================
-// Actyra — Demo di ispezione qualità con rete neurale
+// Actyra — SIMULAZIONE di una linea di ispezione qualità
 // ----------------------------------------------------------------
-// Un nastro trasportatore anima componenti di occhialeria (lenti,
-// aste, montature) verso uno scanner. Ogni pezzo può avere un
-// difetto (graffio, scheggiatura, macchia). La "rete" lo classifica
-// con un'accuratezza che dipende dal livello di addestramento
-// selezionato: è la dimostrazione visiva del principio "più esempi
-// vede, meno sbaglia".
+// ATTENZIONE: qui NON gira una rete neurale, ed è dichiarato anche
+// sulla pagina. Un nastro anima componenti di occhialeria (lenti,
+// aste, montature) verso uno scanner; ogni pezzo può avere un
+// difetto (graffio, scheggiatura, macchia) e l'esito è estratto a
+// caso con la probabilità di accuratezza tipica del livello di
+// addestramento scelto. Serve a mostrare il principio "più esempi
+// vede, meno sbaglia", non a fingere un modello funzionante.
+// La rete vera del sito è quella di rps.js (pagina "Sfida la rete"),
+// che si addestra davvero nel browser.
 // Le statistiche (ispezionati, rilevati, errori, precisione) sono
 // conteggi reali della sessione, aggiornati a ogni pezzo.
 // ================================================================

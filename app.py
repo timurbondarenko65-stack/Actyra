@@ -1,10 +1,35 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
+from werkzeug.middleware.proxy_fix import ProxyFix
 import os
 import smtplib
 import ssl
 from email.message import EmailMessage
 
 app = Flask(__name__)
+
+# Railway sta davanti all'app come reverse proxy: senza questo, Flask crede di
+# essere servito in http e genera link assoluti sbagliati (l'og:image dell'anteprima
+# WhatsApp/LinkedIn verrebbe http e molte piattaforme lo scartano).
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+# Un solo indirizzo ufficiale: chi arriva dal vecchio URL Railway (o da www)
+# viene portato su actyra.it, cosi' non restano in giro due siti identici e
+# nessuno vede piu' l'indirizzo ".up.railway.app".
+DOMINIO_CANONICO = os.environ.get("CANONICAL_HOST", "actyra.it")
+
+
+@app.before_request
+def forza_dominio_canonico():
+    host = request.host.split(":")[0].lower()
+    if host in ("localhost", "127.0.0.1", DOMINIO_CANONICO):
+        return None
+    if not (host.endswith(".railway.app") or host == "www." + DOMINIO_CANONICO):
+        return None
+    percorso = request.full_path if request.query_string else request.path
+    # 308 per POST: un 301 trasformerebbe l'invio del form in una GET,
+    # facendo perdere il messaggio del cliente.
+    codice = 301 if request.method in ("GET", "HEAD") else 308
+    return redirect("https://" + DOMINIO_CANONICO + percorso, code=codice)
 
 # Configurazione invio email. Nessuna credenziale sta nel codice: si impostano
 # come variabili d'ambiente su Railway (Variables). Se mancano, il form non

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Tecnologie — Actyra{% endblock %}
-{% block description %}Script, reti neurali e agenti LLM spiegati semplici, con animazioni e una demo di ispezione qualità che gira nel browser.{% endblock %}
+{% block description %}Script, reti neurali e agenti LLM spiegati semplici, con animazioni e una simulazione di linea di ispezione qualità.{% endblock %}
 
 {% block content %}
 
@@ -16,7 +16,9 @@
       <p style="font-size: var(--fs-md); color: var(--grafite-2); max-width: 62ch; margin-bottom: var(--sp-2);">
         Script, reti neurali, agenti basati su modelli linguistici: sono i tre strumenti
         con cui Actyra costruisce ogni progetto. Qui sotto cosa sono, come funzionano
-        e quando conviene usarli — senza tecnicismi, con una demo che gira davvero.
+        e quando conviene usarli — senza tecnicismi, con una simulazione della linea
+        di ispezione e, nella pagina "Sfida la rete", una rete che si addestra davvero
+        nel browser.
       </p>
     </div>
   </div>
@@ -200,15 +202,14 @@
 
     <!-- LA DEMO -->
     <div class="reveal" style="margin-top: var(--sp-8); margin-bottom: var(--sp-6);">
-      <span class="section-eyebrow">Vederla per crederci</span>
+      <span class="section-eyebrow">Simulazione</span>
       <h2 style="font-size: var(--fs-xl); max-width: 26ch; letter-spacing: -0.02em; margin-bottom: var(--sp-4);">
         Più esempi vede, meno sbaglia.
       </h2>
       <p style="font-size: var(--fs-base); color: var(--grafite-2); max-width: 62ch;">
         Una linea di controllo qualità simulata: componenti di occhialeria scorrono sul
-        nastro e una rete neurale li ispeziona uno a uno. Scegli quanti esempi ha visto
-        e osserva la precisione cambiare. I contatori sono reali: contano ogni pezzo di
-        questa sessione.
+        nastro e vengono ispezionati uno a uno. Scegli quanti esempi avrebbe visto la
+        rete in addestramento e osserva come cambia la precisione.
       </p>
     </div>
 
@@ -238,7 +239,7 @@
         <div class="conveyor" id="conveyor-track">
           <div class="scanner-zone" id="scanner-zone">
             <div class="scanner-beam"></div>
-            <div class="scanner-label">Rete neurale</div>
+            <div class="scanner-label">Ispezione</div>
           </div>
           <div class="conveyor-belt"></div>
         </div>
@@ -266,11 +267,22 @@
       </div>
     </div>
 
-    <div class="reveal" style="margin-top: var(--sp-6);">
-      <p style="font-size: var(--fs-base); color: var(--grafite-2);">
-        Vuoi vederla imparare <em style="color: var(--petrolio);">contro di te</em>?
-        <a href="{{ url_for('sfida') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">Sfida la rete a sasso, carta, forbici &rarr;</a>
-      </p>
+    <div class="reveal" style="margin-top: var(--sp-5);">
+      <div class="explainer" style="max-width: 74ch;">
+        <div class="explainer-title">Cosa è simulato e cosa no</div>
+        <p>
+          Qui sopra <strong>non gira una rete neurale</strong>: pezzi e difetti sono generati
+          a caso, e l'esito di ogni ispezione riproduce l'accuratezza tipica di una rete
+          addestrata su quel numero di esempi. Serve a far vedere il principio — più esempi,
+          meno errori — non a spacciare un modello per funzionante. I contatori invece sono
+          reali: contano i pezzi di questa sessione.
+        </p>
+        <p>
+          Una rete vera, che si addestra davvero mentre la usi, è
+          <a href="{{ url_for('sfida') }}" style="color: var(--petrolio); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">nella pagina "Sfida la rete"</a>:
+          lì l'apprendimento avviene nel tuo browser, sulle tue mosse, a ogni round.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -380,5 +392,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='inspector.js') }}?v=2"></script>
+<script src="{{ url_for('static', filename='inspector.js') }}?v=3"></script>
 {% endblock %}

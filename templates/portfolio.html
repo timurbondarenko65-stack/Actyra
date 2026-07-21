@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Portfolio — Actyra{% endblock %}
-{% block description %}Tre architetture concrete per i pain point reali dell'occhialeria e delle PMI bellunesi: automazione preventivi, controllo qualità visivo, lettura automatica di ordini e DDT. Problema, soluzione, tempi, ROI.{% endblock %}
+{% block description %}Tre scenari di lavoro tipici dell'occhialeria e delle PMI del territorio: automazione preventivi, controllo qualità visivo, lettura automatica di ordini e DDT. Architettura, tempi e ritorno stimato.{% endblock %}
 
 {% block content %}
 
@@ -14,11 +14,12 @@
         Dimostratori e prototipi &mdash; la base tecnica.
       </h1>
       <p style="font-size: var(--fs-md); color: var(--grafite-2); line-height: 1.7;">
-        Questi non sono ancora clienti reali &mdash; il portafoglio si sta costruendo adesso.
-        Sono <strong style="color: var(--grafite); font-weight: 500;">dimostratori costruiti su problemi
-        concreti</strong> del distretto dell'occhialeria e delle PMI della provincia di Belluno,
-        con architettura, tempi e ritorno stimato. Se riconosci uno di questi processi, è esattamente
-        il tipo di lavoro che faccio.
+        Questi non sono clienti reali, e nessuna delle aziende descritte esiste: il portafoglio
+        si sta costruendo adesso. Sono <strong style="color: var(--grafite); font-weight: 500;">scenari
+        di lavoro tipici</strong> del distretto dell'occhialeria e delle PMI del territorio, con
+        l'architettura che userei, i tempi e il ritorno <em>stimato</em> &mdash; numeri di riferimento
+        da verificare sul processo vero, non risultati già ottenuti. Se riconosci uno di questi
+        processi, è esattamente il tipo di lavoro che faccio.
       </p>
     </div>
 
@@ -96,17 +97,17 @@
 
         <div class="case-cols">
           <div class="case-col">
-            <h4>La situazione oggi</h4>
+            <h4>Lo scenario tipico</h4>
             <p>
-              Un'azienda di componenti in plastica riceve 15&ndash;20 richieste di preventivo
+              Un'azienda di componenti in plastica che riceva 15&ndash;20 richieste di preventivo
               a settimana. Arriva una mail (&laquo;quantità X di aste, frontali, naselli&raquo;),
               si apre l'Excel dei prezzi, si scrive il preventivo in Word, si risponde.
               <strong>20&ndash;30 minuti a preventivo &times; 15 = 7&ndash;8 ore/settimana</strong>,
-              più 2&ndash;3 ore di correzioni quando un prezzo esce sbagliato.
+              più le correzioni quando un prezzo esce sbagliato.
             </p>
           </div>
           <div class="case-col">
-            <h4>Cosa costruisco</h4>
+            <h4>Cosa costruirei</h4>
             <p>Un agente che, alla ricezione della richiesta:</p>
             <ul class="case-steps">
               <li>legge quantità e tipo di componente (RAG sul listino)</li>
@@ -119,12 +120,12 @@
 
         <div class="case-result">
           <div class="result-item"><span class="result-num">2&ndash;3h</span><span class="result-lbl">a settimana, solo l'approvazione finale (da 7&ndash;8h)</span></div>
-          <div class="result-item"><span class="result-num">0</span><span class="result-lbl">errori di calcolo</span></div>
+          <div class="result-item"><span class="result-num">&darr;</span><span class="result-lbl">errori di calcolo: il prezzo non si digita più a mano</span></div>
           <div class="result-item"><span class="result-num">&lt; 2h</span><span class="result-lbl">dalla mail al preventivo (invece di 1&ndash;2 giorni)</span></div>
         </div>
 
         <div class="case-meta">
-          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">~5 ore/settimana, ~1 mese di lavoro l'anno</span></div>
+          <div class="meta-pair"><span class="meta-k">Ritorno atteso</span><span class="meta-v">~5 ore/settimana &mdash; stima da verificare sui volumi reali</span></div>
           <div class="meta-pair meta-tech">
             <span class="meta-k">Stack</span>
             <span class="case-tags">
@@ -158,37 +159,38 @@
 
         <div class="case-cols">
           <div class="case-col">
-            <h4>La situazione oggi</h4>
+            <h4>Lo scenario tipico</h4>
             <p>
               Aste, morsetti e minuteria in metallo: ogni pezzo passa un controllo ottico
-              prima di spedire. Oggi un operatore li esamina alla luce, per
-              <strong>6&ndash;8 ore al giorno (~2.500&euro;/mese)</strong>. A fine turno,
-              quando la stanchezza sale, gli sfugge il 15&ndash;20% dei difetti &mdash;
-              e il cliente reclama &laquo;mi arriva con il graffio&raquo;.
+              prima di spedire. Un operatore li esamina alla luce per
+              <strong>6&ndash;8 ore al giorno</strong>, e a fine turno &mdash; quando la
+              stanchezza sale &mdash; qualche difetto sfugge: poi il cliente reclama
+              &laquo;mi arriva con il graffio&raquo;, e il reso costa più del controllo.
             </p>
           </div>
           <div class="case-col">
-            <h4>Cosa costruisco</h4>
+            <h4>Cosa costruirei</h4>
             <p>
-              Una rete neurale addestrata su foto di componenti buoni e difettosi, che
-              ispeziona ogni pezzo via telecamera prima della spedizione.
+              Una rete neurale addestrata su foto di componenti buoni e difettosi, che fa
+              una prima selezione via telecamera prima della spedizione. Non sostituisce
+              l'operatore: gli toglie di mezzo i pezzi ovvi.
             </p>
             <ul class="case-steps">
-              <li>difetto rilevato &rarr; avviso all'operatore, pezzo a scarto</li>
+              <li>pezzo sospetto &rarr; segnalato, decide comunque la persona</li>
               <li>ogni pezzo lascia una foto e un verdetto tracciabili</li>
-              <li>l'operatore lavora solo sui casi dubbi, non su tutto</li>
+              <li>l'occhio umano si concentra sui casi dubbi, non su tutto</li>
             </ul>
           </div>
         </div>
 
         <div class="case-result">
-          <div class="result-item"><span class="result-num">98%+</span><span class="result-lbl">difetti intercettati (vs 80&ndash;85% a fine turno)</span></div>
+          <div class="result-item"><span class="result-num">&uarr;</span><span class="result-lbl">difetti intercettati: la macchina non cala a fine turno</span></div>
           <div class="result-item"><span class="result-num">2&ndash;3h</span><span class="result-lbl">di controllo al giorno, solo sui sospetti (da 6&ndash;8h)</span></div>
-          <div class="result-item"><span class="result-num">100%</span><span class="result-lbl">tracciabilità: foto + verdetto per ogni pezzo</span></div>
+          <div class="result-item"><span class="result-num">Tracciabilità</span><span class="result-lbl">foto e verdetto archiviati per ogni pezzo</span></div>
         </div>
 
         <div class="case-meta">
-          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">payback in 3&ndash;5 mesi</span></div>
+          <div class="meta-pair"><span class="meta-k">Come si affronta</span><span class="meta-v">progetto lungo: prima si raccolgono le foto, poi un pilota su una sola famiglia di pezzi. La precisione reale si misura lì, non si promette prima.</span></div>
           <div class="meta-pair meta-tech">
             <span class="meta-k">Stack</span>
             <span class="case-tags">
@@ -230,7 +232,7 @@
 
         <div class="case-cols">
           <div class="case-col">
-            <h4>La situazione oggi</h4>
+            <h4>Lo scenario tipico</h4>
             <p>
               Decine di ordini da fornitori diversi &mdash; PDF, foto, allegati mail. Un operatore
               legge ogni ordine e trascrive fornitore, quantità, prezzo e data nel gestionale.
@@ -239,7 +241,7 @@
             </p>
           </div>
           <div class="case-col">
-            <h4>Cosa costruisco</h4>
+            <h4>Cosa costruirei</h4>
             <p>Un sistema che riceve il documento e:</p>
             <ul class="case-steps">
               <li>estrae il testo con OCR, anche da foto e scansioni</li>
@@ -252,12 +254,12 @@
 
         <div class="case-result">
           <div class="result-item"><span class="result-num">~20 min</span><span class="result-lbl">a settimana di sola verifica (da 2&ndash;3h)</span></div>
-          <div class="result-item"><span class="result-num">0</span><span class="result-lbl">errori di trascrizione</span></div>
+          <div class="result-item"><span class="result-num">&darr;</span><span class="result-lbl">errori di trascrizione: nessuna ricopiatura a mano</span></div>
           <div class="result-item"><span class="result-num">&lt; 5 min</span><span class="result-lbl">dall'arrivo all'inserimento (invece di 1&ndash;2 giorni)</span></div>
         </div>
 
         <div class="case-meta">
-          <div class="meta-pair"><span class="meta-k">ROI stimato</span><span class="meta-v">~150 ore/anno recuperate</span></div>
+          <div class="meta-pair"><span class="meta-k">Ritorno atteso</span><span class="meta-v">~100&ndash;150 ore/anno &mdash; stima da verificare sui volumi reali</span></div>
           <div class="meta-pair meta-tech">
             <span class="meta-k">Stack</span>
             <span class="case-tags">
