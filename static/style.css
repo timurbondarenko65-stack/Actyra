@@ -1584,7 +1584,10 @@ section {
   .case-thumb *::after { animation: none !important; }
 }
 
-/* Thumb 1 — preventivi (il foglio esce e il timbro atterra) */
+/* Thumb 1 — preventivi (il flusso dell'agente che si accende stadio per stadio).
+   Ogni stadio e il filo che lo precede condividono lo stesso ciclo di 6s e si
+   attivano a cascata tramite animation-delay: l'onda sale e si spegne nello
+   stesso ordine, senza mai sfasarsi. */
 .thumb-preventivi {
   display: flex;
   align-items: center;
@@ -1592,119 +1595,157 @@ section {
   padding: var(--sp-6);
 }
 
-.tp-stage {
-  position: relative;
-  width: 168px;
-  height: 148px;
+.tp-pipe {
+  width: 194px;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+}
+
+.tp-step {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.tp-ico {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1.5px solid rgba(246, 245, 241, 0.2);
+  color: rgba(246, 245, 241, 0.3);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  /* Il foglio deve sparire DENTRO la fessura, non restare visibile sotto */
+  animation: tpNode 6s ease-out infinite;
+}
+
+.tp-ico svg { width: 18px; height: 18px; }
+
+/* L'alone che pulsa nell'istante in cui lo stadio si accende */
+.tp-ico::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 13px;
+  border: 1.5px solid var(--ottone);
+  opacity: 0;
+  animation: tpHalo 6s ease-out infinite;
+}
+
+.tp-txt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: rgba(246, 245, 241, 0.28);
+  animation: tpLabel 6s ease-out infinite;
+}
+
+.tp-txt b {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+.tp-wire {
+  width: 2px;
+  height: 20px;
+  margin-left: 17px;
+  background: rgba(246, 245, 241, 0.14);
+  border-radius: 2px;
+  position: relative;
   overflow: hidden;
 }
 
-/* La fessura da cui esce il foglio */
-.tp-slot {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 4px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, transparent, rgba(168, 118, 59, 0.85) 15%, rgba(168, 118, 59, 0.85) 85%, transparent);
-  box-shadow: 0 0 14px rgba(168, 118, 59, 0.45);
-  z-index: 3;
-}
-
-.tp-sheet {
-  position: relative;
-  width: 128px;
-  height: 138px;
-  border-radius: 5px 5px 2px 2px;
-  background: linear-gradient(170deg, #FBFAF7, #E9E6DE);
-  box-shadow: 0 16px 30px -14px rgba(0, 0, 0, 0.75);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 26px;
-  transform: translateY(100%);
-  animation: tpSheet 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-
-.tp-sheet-label {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #8C8578;
-}
-
-.tp-sheet-total {
-  margin-top: 7px;
-  font-family: var(--font-display);
-  font-size: 30px;
-  letter-spacing: -0.03em;
-  color: var(--grafite);
-}
-
-.tp-sheet-rule {
-  width: 44px;
-  height: 1.5px;
-  border-radius: 2px;
-  background: rgba(30, 35, 33, 0.18);
-  margin-top: 12px;
-}
-
-/* Il timbro: arriva dall'alto e schiaccia sul foglio */
-.tp-stamp {
-  position: absolute;
-  left: 50%;
-  bottom: 20px;
-  width: 42px;
-  height: 42px;
-  margin-left: -21px;
-  border-radius: 50%;
-  background: rgba(31, 75, 72, 0.1);
-  border: 2.5px solid var(--petrolio);
-  color: var(--petrolio);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: rotate(-14deg) scale(2.6);
-  animation: tpStamp 6s cubic-bezier(0.3, 1.4, 0.5, 1) infinite;
-}
-
-.tp-stamp svg { width: 20px; height: 20px; }
-
-/* L'onda d'urto del timbro */
-.tp-stamp::after {
+.tp-wire::after {
   content: "";
   position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 2px solid var(--petrolio);
-  opacity: 0;
-  animation: tpImpact 6s ease-out infinite;
+  inset: 0;
+  background: var(--ottone);
+  box-shadow: 0 0 8px rgba(168, 118, 59, 0.7);
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: tpWire 6s ease-in-out infinite;
 }
 
-@keyframes tpSheet {
-  0%       { transform: translateY(100%); }
-  16%      { transform: translateY(-2%); }
-  22%, 82% { transform: translateY(0); }
-  96%,100% { transform: translateY(100%); }
+/* Cascata: stadi ogni 0.85s, fili sfalsati di mezzo passo */
+.s1 .tp-ico, .s1 .tp-ico::after, .s1 .tp-txt { animation-delay: 0s; }
+.w1::after { animation-delay: 0.42s; }
+.s2 .tp-ico, .s2 .tp-ico::after, .s2 .tp-txt { animation-delay: 0.85s; }
+.w2::after { animation-delay: 1.27s; }
+.s3 .tp-ico, .s3 .tp-ico::after, .s3 .tp-txt { animation-delay: 1.7s; }
+.w3::after { animation-delay: 2.12s; }
+.s4 .tp-ico, .s4 .tp-ico::after, .s4 .tp-txt { animation-delay: 2.55s; }
+
+/* L'ultimo stadio e' la conferma: si accende in verde, non in ottone */
+.s4 .tp-ico { animation-name: tpNodeOk; }
+.s4 .tp-ico::after { border-color: #7fd8c8; }
+.s4 .tp-txt { animation-name: tpLabelOk; }
+
+@keyframes tpNode {
+  0%, 4% {
+    border-color: rgba(246, 245, 241, 0.2);
+    color: rgba(246, 245, 241, 0.3);
+    background: transparent;
+    transform: scale(1);
+  }
+  9% { transform: scale(1.09); }
+  13%, 72% {
+    border-color: var(--ottone);
+    color: var(--ottone);
+    background: rgba(168, 118, 59, 0.14);
+    transform: scale(1);
+  }
+  82%, 100% {
+    border-color: rgba(246, 245, 241, 0.2);
+    color: rgba(246, 245, 241, 0.3);
+    background: transparent;
+    transform: scale(1);
+  }
 }
-/* Il timbro scende solo quando il foglio e' gia' fermo (dal 22%) */
-@keyframes tpStamp {
-  0%, 30%  { opacity: 0; transform: rotate(-14deg) scale(2.6); }
-  38%      { opacity: 1; transform: rotate(-14deg) scale(1); }
-  80%      { opacity: 1; transform: rotate(-14deg) scale(1); }
-  90%,100% { opacity: 0; transform: rotate(-14deg) scale(1); }
+@keyframes tpNodeOk {
+  0%, 4% {
+    border-color: rgba(246, 245, 241, 0.2);
+    color: rgba(246, 245, 241, 0.3);
+    background: transparent;
+    transform: scale(1);
+  }
+  9% { transform: scale(1.14); }
+  13%, 72% {
+    border-color: #7fd8c8;
+    color: #7fd8c8;
+    background: rgba(31, 75, 72, 0.42);
+    transform: scale(1);
+  }
+  82%, 100% {
+    border-color: rgba(246, 245, 241, 0.2);
+    color: rgba(246, 245, 241, 0.3);
+    background: transparent;
+    transform: scale(1);
+  }
 }
-@keyframes tpImpact {
-  0%, 37%  { opacity: 0; transform: scale(0.9); }
-  40%      { opacity: 0.8; transform: scale(1); }
-  52%,100% { opacity: 0; transform: scale(1.7); }
+@keyframes tpHalo {
+  0%, 5%   { opacity: 0; transform: scale(0.86); }
+  11%      { opacity: 0.85; transform: scale(1); }
+  26%,100% { opacity: 0; transform: scale(1.35); }
+}
+@keyframes tpLabel {
+  0%, 6%   { color: rgba(246, 245, 241, 0.28); }
+  14%, 72% { color: rgba(246, 245, 241, 0.88); }
+  82%,100% { color: rgba(246, 245, 241, 0.28); }
+}
+@keyframes tpLabelOk {
+  0%, 6%   { color: rgba(246, 245, 241, 0.28); }
+  14%, 72% { color: #7fd8c8; }
+  82%,100% { color: rgba(246, 245, 241, 0.28); }
+}
+@keyframes tpWire {
+  0%, 6%   { transform: scaleY(0); }
+  17%, 72% { transform: scaleY(1); }
+  82%,100% { transform: scaleY(0); }
 }
 
 /* Thumb 2 — computer vision (belt + beam) */
