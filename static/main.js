@@ -44,6 +44,81 @@
     revealItems.forEach(function (el) { el.classList.add('in-view'); });
   }
 
+  // Logo: reagisce alla vicinanza del puntatore e alla pressione.
+  // Scrive --prox (0 lontano → 1 sopra) e --dx/--dy (direzione di arrivo)
+  // sul marchio; il resto lo fa il CSS.
+  const brand = document.querySelector('.brand');
+  const mark = brand && brand.querySelector('.brand-mark');
+  const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (mark && !calmo) {
+    const RAGGIO = 170;       // px entro cui il logo inizia a rispondere
+    let rect = null;          // posizione del marchio, ricalcolata solo se serve
+    let pending = false;
+    let attivo = false;       // evita di riscrivere le variabili quando è già a riposo
+
+    const invalida = function () { rect = null; };
+    window.addEventListener('resize', invalida);
+    window.addEventListener('scroll', invalida, { passive: true });
+
+    const aggiorna = function (mx, my) {
+      if (!rect) rect = mark.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = mx - cx;
+      const dy = my - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist > RAGGIO) {
+        if (attivo) {
+          mark.style.setProperty('--prox', '0');
+          attivo = false;
+        }
+        return;
+      }
+
+      const t = 1 - dist / RAGGIO;
+      const prox = t * t * (3 - 2 * t);  // smoothstep: entra e esce senza scatti
+      const norm = Math.max(dist, 1);
+
+      mark.style.setProperty('--prox', prox.toFixed(3));
+      mark.style.setProperty('--dx', (dx / norm).toFixed(3));
+      mark.style.setProperty('--dy', (dy / norm).toFixed(3));
+      attivo = true;
+    };
+
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch' || pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        aggiorna(e.clientX, e.clientY);
+      });
+    }, { passive: true });
+
+    // Pressione: schiacciata sotto il dito, poi rientro elastico con l'onda.
+    let timerTap = null;
+
+    brand.addEventListener('pointerdown', function () {
+      mark.classList.remove('is-tapped');
+      void mark.offsetWidth;              // riavvia l'animazione dell'onda
+      mark.style.setProperty('--press', '1');
+      mark.classList.add('is-pressing');
+    });
+
+    const rilascia = function () {
+      if (mark.style.getPropertyValue('--press') !== '1') return;
+      mark.style.setProperty('--press', '0');
+      mark.classList.remove('is-pressing');
+      mark.classList.add('is-tapped');
+      clearTimeout(timerTap);
+      timerTap = setTimeout(function () { mark.classList.remove('is-tapped'); }, 600);
+    };
+
+    window.addEventListener('pointerup', rilascia);
+    window.addEventListener('pointercancel', rilascia);
+  }
+
   // Header shadow su scroll
   const header = document.querySelector('.site-header');
   if (header) {
