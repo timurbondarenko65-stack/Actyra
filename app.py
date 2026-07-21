@@ -44,6 +44,18 @@ def not_found(e):
     return render_template("404.html", active=None), 404
 
 
+@app.after_request
+def no_html_cache(response):
+    """Le pagine HTML non vanno mai messe in cache dal browser: dopo un deploy
+    si continuerebbe a vedere la versione vecchia. I file in /static restano
+    cacheabili perche' sono versionati con ?v= nel template."""
+    if response.mimetype == "text/html":
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
