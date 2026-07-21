@@ -13,7 +13,9 @@
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- ?v= forza il browser a riscaricare il CSS dopo un aggiornamento:
+       alza il numero ogni volta che cambi style.css in modo visibile. -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=8">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Actyra — Automazioni su misura per PMI" />
