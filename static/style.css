@@ -1584,7 +1584,7 @@ section {
   .case-thumb *::after { animation: none !important; }
 }
 
-/* Thumb 1 — preventivi (documento che si compila da solo) */
+/* Thumb 1 — preventivi (calcolo del prezzo + totale che scorre) */
 .thumb-preventivi {
   display: flex;
   align-items: center;
@@ -1592,136 +1592,122 @@ section {
   padding: var(--sp-6);
 }
 
-.tp-doc {
-  width: 190px;
-  background: rgba(246, 245, 241, 0.055);
-  border: 1.5px solid rgba(246, 245, 241, 0.32);
-  border-radius: 8px;
-  padding: 14px 15px 15px;
-  box-shadow: 0 18px 34px -22px rgba(0, 0, 0, 0.7);
-  animation: tpDocIn 5.4s ease-in-out infinite;
-}
+.tp-calc { width: 172px; }
 
-.tp-doc-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 11px;
-  margin-bottom: 12px;
-  border-bottom: 1px solid rgba(246, 245, 241, 0.14);
-}
-
-.tp-doc-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--carta);
-  letter-spacing: -0.01em;
-}
-
-.tp-doc-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: var(--grafite);
-  background: var(--ottone);
-  border-radius: 999px;
-  padding: 2px 7px;
-}
-
-.tp-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-  opacity: 0;
-}
-
-.tp-lbl {
-  height: 7px;
-  border-radius: 3px;
-  background: rgba(246, 245, 241, 0.28);
-  flex: 1;
-}
-.tp-r1 .tp-lbl { max-width: 88px; }
-.tp-r2 .tp-lbl { max-width: 104px; }
-.tp-r3 .tp-lbl { max-width: 74px; }
-
-.tp-price {
-  width: 30px;
-  height: 7px;
-  border-radius: 3px;
-  background: rgba(246, 245, 241, 0.5);
-  flex-shrink: 0;
-}
-
-.tp-r1 { animation: tpRow1 5.4s ease-in-out infinite; }
-.tp-r2 { animation: tpRow2 5.4s ease-in-out infinite; }
-.tp-r3 { animation: tpRow3 5.4s ease-in-out infinite; }
-
-.tp-rule {
-  height: 1.5px;
-  background: rgba(246, 245, 241, 0.22);
-  border-radius: 2px;
-  margin: 13px 0 12px;
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: tpRule 5.4s ease-in-out infinite;
-}
-
-.tp-total {
+.tp-line {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  opacity: 0;
-  animation: tpTotal 5.4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
-}
-
-.tp-total-lbl {
+  gap: 10px;
   font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(246, 245, 241, 0.6);
+  font-size: 10.5px;
+  margin-bottom: 9px;
+  opacity: 0;
 }
 
-.tp-total-val {
+.tp-k { color: rgba(246, 245, 241, 0.5); }
+.tp-v { color: var(--carta); letter-spacing: 0.02em; }
+
+.tp-l1 { animation: tpL1 6s ease-in-out infinite; }
+.tp-l2 { animation: tpL2 6s ease-in-out infinite; }
+.tp-l3 { animation: tpL3 6s ease-in-out infinite; }
+
+.tp-eq {
+  height: 1.5px;
+  background: rgba(246, 245, 241, 0.25);
+  border-radius: 2px;
+  margin: 13px 0 11px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: tpEq 6s ease-in-out infinite;
+}
+
+.tp-sum {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  opacity: 0;
+  animation: tpSum 6s ease-out infinite;
+}
+
+.tp-cur {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 19px;
   color: var(--ottone);
-  letter-spacing: -0.01em;
 }
 
-@keyframes tpDocIn {
-  0% { opacity: 0; transform: translateY(8px) scale(0.97); }
-  6% { opacity: 1; transform: translateY(0) scale(1); }
-  90% { opacity: 1; transform: translateY(0) scale(1); }
-  98%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+/* Il totale "scorre" tra valori intermedi e si ferma su quello finale */
+.tp-amount {
+  display: inline-block;
+  height: 24px;
+  overflow: hidden;
+  line-height: 24px;
 }
-@keyframes tpRow1 {
-  0%, 10% { opacity: 0; transform: translateX(-7px); }
-  17%, 90% { opacity: 1; transform: translateX(0); }
+
+.tp-roll {
+  display: block;
+  animation: tpRoll 6s steps(4, end) infinite;
+}
+
+.tp-roll i {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 25px;
+  color: var(--ottone);
+  letter-spacing: -0.02em;
+}
+
+.tp-sent {
+  margin-top: 12px;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(31, 75, 72, 0.6);
+  color: #7fd8c8;
+  border: 1px solid rgba(127, 216, 200, 0.4);
+  opacity: 0;
+  animation: tpSent 6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+@keyframes tpL1 {
+  0%, 4% { opacity: 0; transform: translateX(-7px); }
+  11%, 90% { opacity: 1; transform: translateX(0); }
   97%, 100% { opacity: 0; transform: translateX(0); }
 }
-@keyframes tpRow2 {
-  0%, 22% { opacity: 0; transform: translateX(-7px); }
-  29%, 90% { opacity: 1; transform: translateX(0); }
+@keyframes tpL2 {
+  0%, 14% { opacity: 0; transform: translateX(-7px); }
+  21%, 90% { opacity: 1; transform: translateX(0); }
   97%, 100% { opacity: 0; transform: translateX(0); }
 }
-@keyframes tpRow3 {
-  0%, 34% { opacity: 0; transform: translateX(-7px); }
-  41%, 90% { opacity: 1; transform: translateX(0); }
+@keyframes tpL3 {
+  0%, 24% { opacity: 0; transform: translateX(-7px); }
+  31%, 90% { opacity: 1; transform: translateX(0); }
   97%, 100% { opacity: 0; transform: translateX(0); }
 }
-@keyframes tpRule {
-  0%, 48% { transform: scaleX(0); opacity: 1; }
-  58%, 90% { transform: scaleX(1); opacity: 1; }
+@keyframes tpEq {
+  0%, 36% { transform: scaleX(0); opacity: 1; }
+  44%, 90% { transform: scaleX(1); opacity: 1; }
   97%, 100% { transform: scaleX(1); opacity: 0; }
 }
-@keyframes tpTotal {
-  0%, 60% { opacity: 0; transform: scale(0.7); }
-  70% { opacity: 1; transform: scale(1); }
-  90% { opacity: 1; transform: scale(1); }
+@keyframes tpSum {
+  0%, 44% { opacity: 0; }
+  50%, 90% { opacity: 1; }
+  97%, 100% { opacity: 0; }
+}
+/* 5 valori, 4 scatti: parte a 50% e si ferma a 70% */
+@keyframes tpRoll {
+  0%, 50% { transform: translateY(0); }
+  70%, 100% { transform: translateY(-96px); }
+}
+@keyframes tpSent {
+  0%, 74% { opacity: 0; transform: scale(0.75); }
+  82%, 90% { opacity: 1; transform: scale(1); }
   97%, 100% { opacity: 0; transform: scale(1); }
 }
 
@@ -1735,37 +1721,11 @@ section {
 
 .tv-belt {
   position: relative;
-  height: 90px;
+  height: 108px;
   border-top: 1.5px dashed rgba(246, 245, 241, 0.2);
   border-bottom: 1.5px dashed rgba(246, 245, 241, 0.2);
   margin: 0 -6px;
   overflow: hidden;
-}
-
-.tv-piece {
-  position: absolute;
-  top: 50%;
-  width: 34px;
-  height: 34px;
-  margin-top: -17px;
-  border-radius: 6px;
-  background: rgba(246, 245, 241, 0.14);
-  border: 1.5px solid rgba(246, 245, 241, 0.5);
-  left: -50px;
-}
-
-.tv-piece.p1 { animation: tvMove 6s linear infinite; }
-.tv-piece.p2 { animation: tvMove 6s linear infinite; animation-delay: 2s; }
-.tv-piece.p3 { animation: tvMove 6s linear infinite; animation-delay: 4s; }
-
-.tv-piece.defect::after {
-  content: "";
-  position: absolute;
-  top: 8px; left: 7px;
-  width: 18px; height: 3px;
-  background: #c8583f;
-  transform: rotate(32deg);
-  box-shadow: 0 6px 0 -1px rgba(200,88,63,0.7);
 }
 
 .tv-scanzone {
@@ -1788,56 +1748,87 @@ section {
   margin-left: -1px;
   background: var(--ottone);
   box-shadow: 0 0 12px 2px rgba(168, 118, 59, 0.7);
-  animation: tvBeam 6s ease-in-out infinite;
+  /* un pezzo arriva ogni 2s: il fascio pulsa sullo stesso ritmo */
+  animation: tvBeam 2s ease-in-out infinite;
 }
 
-.tv-verdict {
+/* Il pezzo si ferma sotto lo scanner; il verdetto e' figlio del pezzo,
+   quindi e' sincronizzato per costruzione (niente percentuali indovinate). */
+.tv-piece {
   position: absolute;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  padding: 3px 9px;
-  border-radius: 999px;
   top: 50%;
+  left: -20%;
+  width: 34px;
+  height: 34px;
+  margin-top: -17px;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  background: rgba(246, 245, 241, 0.14);
+  border: 1.5px solid rgba(246, 245, 241, 0.5);
+  animation: tvMove 6s ease-in-out infinite;
+}
+
+.tv-piece.defect::after {
+  content: "";
+  position: absolute;
+  top: 8px; left: 7px;
+  width: 18px; height: 3px;
+  background: #c8583f;
+  transform: rotate(32deg);
+  box-shadow: 0 6px 0 -1px rgba(200,88,63,0.7);
+}
+
+.tv-tag {
+  position: absolute;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
+  bottom: calc(100% + 9px);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 999px;
   opacity: 0;
+  transform: translate(-50%, 5px) scale(0.7);
+  animation: tvTag 6s ease-out infinite;
 }
 
-.tv-ok {
-  background: rgba(31, 75, 72, 0.5);
+.tv-tag.ok {
+  background: rgba(31, 75, 72, 0.8);
   color: #7fd8c8;
-  border: 1px solid rgba(127, 216, 200, 0.4);
-  animation: tvOk 6s ease-in-out infinite;
+  border: 1px solid rgba(127, 216, 200, 0.45);
 }
 
-.tv-bad {
-  background: rgba(200, 88, 63, 0.25);
+.tv-tag.bad {
+  background: rgba(200, 88, 63, 0.4);
   color: #f0a08c;
-  border: 1px solid rgba(240, 160, 140, 0.5);
-  animation: tvBad 6s ease-in-out infinite;
+  border: 1px solid rgba(240, 160, 140, 0.55);
 }
+
+/* Pezzo ed etichetta condividono lo stesso delay: restano sempre in fase */
+.tv-piece.p1, .tv-piece.p1 .tv-tag { animation-delay: 0s; }
+.tv-piece.p2, .tv-piece.p2 .tv-tag { animation-delay: -2s; }
+.tv-piece.p3, .tv-piece.p3 .tv-tag { animation-delay: -4s; }
 
 @keyframes tvMove {
-  0% { left: -50px; }
-  100% { left: calc(100% + 20px); }
+  0%   { left: -20%; }
+  34%  { left: 50%; }
+  58%  { left: 50%; }
+  88%  { left: 122%; }
+  100% { left: 122%; }
+}
+/* Il pezzo e' fermo sotto lo scanner dal 34% al 58%: il verdetto compare
+   dentro quella finestra, mai dopo che il pezzo se n'e' andato. */
+@keyframes tvTag {
+  0%, 39%   { opacity: 0; transform: translate(-50%, 5px) scale(0.7); }
+  46%       { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  55%       { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  62%, 100% { opacity: 0; transform: translate(-50%, 0) scale(1); }
 }
 @keyframes tvBeam {
-  0%, 100% { opacity: 0.4; }
-  28%, 32% { opacity: 1; }
-  62%, 66% { opacity: 1; }
-}
-/* OK flashes when p1/p3 pass center (~around 33% & 100%/0%) */
-@keyframes tvOk {
-  0%, 27% { opacity: 0; transform: translate(-50%,-50%) scale(0.7); }
-  31% { opacity: 1; transform: translate(-50%,-125%) scale(1); }
-  40%, 100% { opacity: 0; transform: translate(-50%,-125%) scale(1); }
-}
-/* SCARTO flashes when p2 (defect) passes center (~around 66%) */
-@keyframes tvBad {
-  0%, 61% { opacity: 0; transform: translate(-50%,-50%) scale(0.7); }
-  65% { opacity: 1; transform: translate(-50%,-125%) scale(1); }
-  76%, 100% { opacity: 0; transform: translate(-50%,-125%) scale(1); }
+  0%, 4%    { opacity: 1; }
+  72%       { opacity: 1; }
+  82%, 100% { opacity: 0.3; }
 }
 
 /* Thumb 3 — OCR (doc scan -> fields) */
