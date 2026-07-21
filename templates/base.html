@@ -15,7 +15,7 @@
 
   <!-- ?v= forza il browser a riscaricare il CSS dopo un aggiornamento:
        alza il numero ogni volta che cambi style.css in modo visibile. -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=10">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=11">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Actyra — Automazioni su misura per PMI" />
@@ -28,12 +28,10 @@
 
 <header class="site-header">
   <nav class="nav" aria-label="Navigazione principale">
-    <a href="{{ url_for('index') }}" class="brand">
-      <span class="brand-mark" aria-hidden="true">
-        <img class="brand-a" src="{{ url_for('static', filename='logo-a.png') }}?v=1" alt="" width="549" height="512">
-        <span class="brand-dot"></span>
-      </span>
-      Actyra
+    <a href="{{ url_for('index') }}" class="brand" aria-label="Actyra">
+      <img class="brand-a" src="{{ url_for('static', filename='logo-a.png') }}?v=1" alt="" aria-hidden="true" width="549" height="512">
+      <span class="brand-word">ctyra</span>
+      <span class="brand-dot" aria-hidden="true"></span>
     </a>
 
     <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false">
@@ -87,7 +85,7 @@
 </footer>
 
 <!-- Come per il CSS, ?v= evita che il browser tenga la versione vecchia. -->
-<script src="{{ url_for('static', filename='main.js') }}?v=3"></script>
+<script src="{{ url_for('static', filename='main.js') }}?v=4"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>

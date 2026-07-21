@@ -48,10 +48,9 @@
   // Scrive --prox (0 lontano → 1 sopra) e --dx/--dy (direzione di arrivo)
   // sul marchio; il resto lo fa il CSS.
   const brand = document.querySelector('.brand');
-  const mark = brand && brand.querySelector('.brand-mark');
   const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (mark && !calmo) {
+  if (brand && !calmo) {
     const RAGGIO = 170;       // px entro cui il logo inizia a rispondere
     let rect = null;          // posizione del marchio, ricalcolata solo se serve
     let pending = false;
@@ -62,7 +61,7 @@
     window.addEventListener('scroll', invalida, { passive: true });
 
     const aggiorna = function (mx, my) {
-      if (!rect) rect = mark.getBoundingClientRect();
+      if (!rect) rect = brand.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
       const dx = mx - cx;
@@ -71,7 +70,7 @@
 
       if (dist > RAGGIO) {
         if (attivo) {
-          mark.style.setProperty('--prox', '0');
+          brand.style.setProperty('--prox', '0');
           attivo = false;
         }
         return;
@@ -81,9 +80,9 @@
       const prox = t * t * (3 - 2 * t);  // smoothstep: entra e esce senza scatti
       const norm = Math.max(dist, 1);
 
-      mark.style.setProperty('--prox', prox.toFixed(3));
-      mark.style.setProperty('--dx', (dx / norm).toFixed(3));
-      mark.style.setProperty('--dy', (dy / norm).toFixed(3));
+      brand.style.setProperty('--prox', prox.toFixed(3));
+      brand.style.setProperty('--dx', (dx / norm).toFixed(3));
+      brand.style.setProperty('--dy', (dy / norm).toFixed(3));
       attivo = true;
     };
 
@@ -100,19 +99,19 @@
     let timerTap = null;
 
     brand.addEventListener('pointerdown', function () {
-      mark.classList.remove('is-tapped');
-      void mark.offsetWidth;              // riavvia l'animazione dell'onda
-      mark.style.setProperty('--press', '1');
-      mark.classList.add('is-pressing');
+      brand.classList.remove('is-tapped');
+      void brand.offsetWidth;              // riavvia l'animazione dell'onda
+      brand.style.setProperty('--press', '1');
+      brand.classList.add('is-pressing');
     });
 
     const rilascia = function () {
-      if (mark.style.getPropertyValue('--press') !== '1') return;
-      mark.style.setProperty('--press', '0');
-      mark.classList.remove('is-pressing');
-      mark.classList.add('is-tapped');
+      if (brand.style.getPropertyValue('--press') !== '1') return;
+      brand.style.setProperty('--press', '0');
+      brand.classList.remove('is-pressing');
+      brand.classList.add('is-tapped');
       clearTimeout(timerTap);
-      timerTap = setTimeout(function () { mark.classList.remove('is-tapped'); }, 600);
+      timerTap = setTimeout(function () { brand.classList.remove('is-tapped'); }, 600);
     };
 
     window.addEventListener('pointerup', rilascia);

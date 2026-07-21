@@ -159,66 +159,67 @@ section {
 .brand {
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 600;   /* si accorda al peso della A del marchio */
   letter-spacing: -0.02em;
   color: var(--grafite);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
 }
 
-/* Marchio: la "A" (immagine) e il punto ottone (CSS), animati separatamente.
+/* Il marchio è la A iniziale del nome: immagine + "ctyra" a testo + punto ottone.
    --prox = vicinanza del puntatore (0 lontano → 1 sopra), --dx/--dy = direzione
    da cui arriva; li scrive main.js. --press sale a 1 mentre il logo è premuto. */
-.brand-mark {
+.brand {
   --prox: 0;
   --dx: 0;
   --dy: 0;
   --press: 0;
-  position: relative;
-  width: 26px;
-  height: 26px;
-  flex: none;
+}
+
+/* Il marchio non vira in ottone come gli altri link: la A è un'immagine e
+   resterebbe scura, spezzando la parola in due colori. Basta l'animazione. */
+.brand:hover { color: var(--grafite); }
+
+/* La A siede sulla baseline di "ctyra" e ne continua il tratto. */
+.brand-a {
+  height: 0.74em;
+  width: auto;
   display: block;
+  flex: none;
+  margin-right: 0.02em;
+  transform-origin: 50% 100%;
   transform:
-    translate(calc(var(--dx) * var(--prox) * 3px), calc(var(--dy) * var(--prox) * 3px))
-    scale(calc(1 + var(--prox) * 0.06 - var(--press) * 0.12));
+    rotate(calc(var(--dx) * var(--prox) * 3deg))
+    scale(calc(1 + var(--prox) * 0.05 - var(--press) * 0.13));
   transition: transform 0.45s var(--ease-out);
   will-change: transform;
 }
 
-.brand-mark.is-pressing { transition-duration: 0.12s; }
+.brand-word { display: block; }
 
-/* Al rilascio la scala rientra con un piccolo rimbalzo. */
-.brand-mark.is-tapped { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-
-.brand-a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 83.3%;
-  height: auto;
-  display: block;
-  transform-origin: 50% 100%;
-  transform: rotate(calc(var(--dx) * var(--prox) * 4deg));
-  transition: transform 0.5s var(--ease-out);
-}
-
-/* Il punto si muove più della lettera: leggera parallasse verso il puntatore. */
+/* Punto fermo del nome: cresce e si accende all'avvicinarsi. */
 .brand-dot {
-  position: absolute;
-  left: 86.9%;
-  top: 86.9%;
-  width: 13.2%;
-  height: 13.2%;
+  width: 0.13em;
+  height: 0.13em;
+  flex: none;
+  margin-left: 0.045em;
+  position: relative;
   border-radius: 50%;
   background: var(--ottone);
   transform:
     translate(calc(var(--dx) * var(--prox) * 2px), calc(var(--dy) * var(--prox) * 2px))
-    scale(calc(1 + var(--prox) * 0.45));
-  box-shadow: 0 0 calc(var(--prox) * 7px) rgba(168, 118, 59, calc(var(--prox) * 0.75));
+    scale(calc(1 + var(--prox) * 0.6 - var(--press) * 0.45));
+  box-shadow: 0 0 calc(var(--prox) * 7px) rgba(168, 118, 59, calc(var(--prox) * 0.7));
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
+
+.brand.is-pressing .brand-a,
+.brand.is-pressing .brand-dot { transition-duration: 0.12s; }
+
+/* Al rilascio la scala rientra con un piccolo rimbalzo. */
+.brand.is-tapped .brand-a,
+.brand.is-tapped .brand-dot { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
 /* Onda che parte dal punto al click. */
 .brand-dot::after {
@@ -231,7 +232,7 @@ section {
   pointer-events: none;
 }
 
-.brand-mark.is-tapped .brand-dot::after {
+.brand.is-tapped .brand-dot::after {
   animation: brand-ripple 0.6s var(--ease-out);
 }
 
@@ -241,14 +242,13 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-mark,
   .brand-a,
   .brand-dot {
     transform: none;
     transition: none;
   }
   .brand-dot { box-shadow: none; }
-  .brand-mark.is-tapped .brand-dot::after { animation: none; }
+  .brand.is-tapped .brand-dot::after { animation: none; }
 }
 
 .nav-links {
