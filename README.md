@@ -72,14 +72,31 @@ dei discendenti `position: fixed`: il menu mobile è quindi un dropdown
 `opacity`. Non tornare al `position: fixed` a schermo intero senza togliere
 il backdrop-filter.
 
+### Form contatto (invio email)
+
+`app.py` invia davvero il messaggio via SMTP. **Le credenziali non stanno nel
+codice**: vanno impostate come variabili d'ambiente su Railway (tab *Variables*).
+
+| Variabile   | Cosa metterci                                    |
+|-------------|--------------------------------------------------|
+| `SMTP_HOST` | server SMTP del provider di `info@actyra.it`     |
+| `SMTP_PORT` | `587` (STARTTLS) oppure `465` (SSL diretto)      |
+| `SMTP_USER` | l'indirizzo completo, es. `info@actyra.it`       |
+| `SMTP_PASS` | password (per Gmail: *password per le app*)      |
+| `MAIL_TO`   | dove ricevere, default `info@actyra.it`          |
+
+Se le variabili mancano o l'invio fallisce, il form **non finge**: mostra un
+errore con email e telefono, e il messaggio completo viene scritto nei log di
+Railway, così si può recuperare e rispondere a mano. L'email ha `Reply-To`
+impostato sul cliente: basta premere "Rispondi".
+
+I valori dei campi vengono ripuliti dagli a capo prima di finire nelle
+intestazioni: impedisce di usare il form per iniettare `Bcc` verso terzi.
+
 ### Cosa manca ancora
 
-1. **Backend email del form contatto**: `app.py` accetta il POST ma non invia niente.
-   Da collegare con Resend, Postmark, o SMTP di un provider (es. Zoho, Fastmail).
-2. **Dominio actyra.it**: non verificato disponibile. Se occupato, sostituire l'indirizzo
-   email in `base.html` (footer) e `contact.html`.
-3. **Favicon e Open Graph image**: aggiungere quando ci sarà un logo definitivo.
-4. **Analytics**: nessuno per ora. Se serve, Plausible o Umami — privacy-friendly,
+1. **Favicon e Open Graph image**: aggiungere quando ci sarà un logo definitivo.
+2. **Analytics**: nessuno per ora. Se serve, Plausible o Umami — privacy-friendly,
    niente cookie banner.
 
 ### Accessibilità
