@@ -114,7 +114,15 @@
   }
 
   function scannerCenter() {
-    return scanner.offsetLeft + scanner.offsetWidth / 2;
+    // ATTENZIONE: offsetLeft ignora le trasformazioni CSS. La .scanner-zone usa
+    // "left:50% + translateX(-50%)", quindi offsetLeft restituisce il bordo
+    // sinistro PRIMA dello spostamento e il centro risultava mezza larghezza
+    // (48px) troppo a destra: i pezzi si fermavano di lato invece che sotto il
+    // fascio. getBoundingClientRect tiene conto del transform, quindi e' corretto
+    // qualunque sia il CSS della zona di scansione.
+    const t = track.getBoundingClientRect();
+    const s = scanner.getBoundingClientRect();
+    return (s.left + s.width / 2) - t.left;
   }
 
   // La classificazione: giusta con probabilità = accuratezza del livello.
@@ -283,7 +291,7 @@
   } else {
     spawnPiece();
     const p = pieces[0];
-    p.x = scannerCenter() - 40;
+    p.x = scannerCenter() - PIECE_W / 2;
     p.el.style.transform = 'translateX(' + p.x + 'px)';
     classify(p);
   }
